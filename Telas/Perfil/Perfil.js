@@ -1,61 +1,28 @@
 const colorThief = new ColorThief();
+const colorCache = {}; 
 
 document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll('.friend img').forEach(img => {
-
+  document.querySelectorAll('.profile img, .friend img').forEach(img => {
     if (img.complete) {
-      setBorderColor(img);
+      applyBorder(img);
     } else {
-      img.addEventListener('load', () => setBorderColor(img));
+      img.addEventListener('load', () => applyBorder(img));
     }
   });
 });
 
-function setBorderColor(img) {
-  try {
-    const color = colorThief.getColor(img);
-    img.style.borderColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
-  } catch (e) {
-    console.log("Erro ao pegar cor:", e);
-  }
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll('.avatar').forEach(img => {
+function applyBorder(img) {
+  if (colorCache[img.src]) {
     
-    if (img.complete) {
-      setBorderColor(img);
-    } else {
-      img.addEventListener('load', () => setBorderColor(img));
+    img.style.borderColor = colorCache[img.src];
+  } else {
+    try {
+      const color = colorThief.getColor(img, 10); 
+      const rgb = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
+      colorCache[img.src] = rgb;
+      img.style.borderColor = rgb;
+    } catch (e) {
+      console.log("Erro ao pegar cor:", e);
     }
-  });
-});
-
-function setBorderColor(img) {
-  try {
-    const color = colorThief.getColor(img);
-    img.style.borderColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
-  } catch (e) {
-    console.log("Erro ao pegar cor:", e);
-  }
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll('.profile img').forEach(img => {
-    
-    if (img.complete) {
-      setBorderColor(img);
-    } else {
-      img.addEventListener('load', () => setBorderColor(img));
-    }
-  });
-});
-
-function setBorderColor(img) {
-  try {
-    const color = colorThief.getColor(img);
-    img.style.borderColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
-  } catch (e) {
-    console.log("Erro ao pegar cor:", e);
   }
 }
