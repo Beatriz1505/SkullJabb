@@ -15,8 +15,8 @@ body {
   flex-direction: column;
 }
 
-
 .content {
+  background-color: #3A415A;
   flex: 1;
 }
 
@@ -55,7 +55,6 @@ body {
   margin-left: -15px;
   text-align: center;
   display: flex;
-  
 }
 
 .search {
@@ -134,6 +133,171 @@ body {
   width: 59px;
   padding: 4px;
   margin-right: 15px;
+}
+
+.loja-container {
+  padding: 40px;
+  color: white;
+}
+
+.titulo-loja {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 30px;
+  font-family: "Orbitron", sans-serif;
+  font-weight: lighter;
+}
+
+
+.box {
+  background-color: #515D84;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 20px;
+  max-width: 304px;
+  height: 173px;
+}
+
+.title-box {
+  font-size: 28px;
+  text-align: left;
+  margin-bottom: 10px;
+  font-family: 'Orbitron', sans-serif;
+  color: white;
+}
+
+.box-icon {
+  width: 88px;
+  height: 88px;
+}
+
+
+.points-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.points-box .valor {
+  font-size: 38px;
+  font-weight: lighter;
+  font-family: 'Orbitron', sans-serif;
+  color: white;
+}
+
+
+.checkin-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.checkin-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.gift-icon {
+  margin-left: -20px;
+  margin-top: -25px;
+  width: 128px;
+  height: 128px;
+}
+
+.checkin-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.checkin-box .valor {
+  margin: 0;  
+  font-size: 36px;
+  font-weight: lighter;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.btn-resgatar {
+  background-color: #3A415A;
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 20px;
+  font-family: 'Orbitron', sans-serif;
+  cursor: pointer;
+}
+
+.btn-resgatar:hover {
+  transition: 0.3s;
+  background-color: #E1E0EE;
+  color: #3A415A;
+}
+
+/* -------- ITENS -------- */
+.item-card {
+  background-color: #515D84;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+  max-width: 329px;
+  height: 314px;
+}
+
+.item-card img {
+  border-radius: 8px;
+}
+
+.gam {
+  max-width: 300px;
+  height: 180px;
+}
+
+.mold {
+  max-width: 226px;
+  height: 212px;
+}
+
+.Ícone {
+  max-width: 300px;
+  max-height: 212px;
+}
+
+.SJ {
+  max-width: 83px;
+  height: 83px;
+  margin-bottom: 20px;
+}
+
+.price {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 38px;
+  border-radius: 20px;
+  margin-bottom: 27px;
+  padding: 5px 15px;
+  display: inline-block;
+  font-weight: lighter;
+  color: white;
+}
+
+.game-price {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 38px;
+  border-radius: 20px;
+  padding: 5px 15px;
+  margin-top: 30px;
+  display: inline-block;
+  font-weight: lighter;
+  color: white;
+}
+
+.item-card:hover {
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.50);
+  transition: 0.3s;
+  transform: scale(1.05);
+  cursor: pointer;
 }
 
 footer {
