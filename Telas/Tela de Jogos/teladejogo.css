@@ -105,6 +105,7 @@ body {
 
 .nav-links a:hover {
   border-bottom: 2px solid #3b7ef5;
+  color: #3b7ef5;
   transition: color 0.3s;
 }
 
@@ -134,38 +135,282 @@ body {
   margin-right: 15px;
 }
 
-/**corpo**/
-
+/* ===== Container do jogo ===== */
 .container {
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    min-height: 100vh;
+  padding: 30px;
 }
 
-.card-jogo{
-background-color: #2C2E40;
-padding: 20px;
-margin-top: 40px;
-margin-left: 20px;
-max-width: 1200px;
-width: 90%;
-border-radius: 10px;
-box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+.card-jogo {
+  display: flex;
+  background: #2C2E40;
+  padding: 25px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  gap: 30px;
 }
 
-.img-jogo{
-width: 300px;
-height: auto;
-border-radius: 25px;
+/* Imagem do jogo */
+.img-jogo img {
+  width: 400px;  /* bem maior que antes */
+  border-radius: 12px;
+}
+
+/* Lado direito (infos + botões) */
+.game-info {
+  flex: 1;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.game-title {
+  font-size: 32px;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  font-family: "Orbitron", sans-serif;
+}
+
+.price-box {
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.old-price {
+  text-decoration: line-through;
+  color: #aaa;
+  margin-right: 8px;
+}
+
+.discounted-price {
+  color: #2873C9;
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+.discount {
+  color: #2873C9;
+  font-weight: bold;
+}
+
+/* Botões alinhados na vertical */
+.btn-box {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 250px;
+}
+
+.btn-box button {
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.buy-btn { background: #2873C9; color: white; }
+.buy-btn:hover { background: #ffff; color: black;}
+
+.wishlist-btn { background: #76809B; color: white; }
+.wishlist-btn:hover { background: #ffff; color: black;}
+
+.cart-btn { background: #76809B; color: white; }
+.cart-btn:hover { background: #ffff; color: black;}
+
+/* ===== Descrição ===== */
+.game-description {
+  margin-top: 25px;
+  background: #242432;
+  padding: 20px;
+  border-radius: 10px;
+  color: white;
+  line-height: 1.6;
+}
+
+/* ===== Parte inferior ===== */
+.bottom-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Avaliações e Conquistas lado a lado */
+  gap: 30px;
+  margin-top: 30px;
+}
+
+/* ===== Avaliações ===== */
+.chat-box {
+  background: #2C2E40;
+  padding: 20px;
+  border-radius: 12px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-box h3 {
+  margin-bottom: 15px;
+  font-family: "Orbitron", sans-serif;
+  font-size: 22px;
+  border-bottom: 2px solid #3b7ef5;
+  padding-bottom: 5px;
+}
+
+.messages {
+  max-height: 250px;
+  overflow-y: auto;
+  margin-bottom: 15px;
+}
+
+.messages p {
+  background: #242432;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+.messages small {
+  color: #aaa;
+}
+
+.chat-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.chat-form textarea {
+  resize: none;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  background: #242432;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+}
+
+.chat-form select {
+  padding: 8px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  background: #242432;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+}
+
+.chat-form button {
+  background: #3b7ef5;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  color: white;
+  transition: 0.3s;
+}
+
+.chat-form button:hover {
+  background: #2a5ed7;
+}
+
+/* ===== Conquistas ===== */
+.achievements-box {
+  background: #2C2E40;
+  padding: 20px;
+  border-radius: 12px;
+  color: white;
+}
+
+.achievements-box h3 {
+  margin-bottom: 15px;
+  font-family: "Orbitron", sans-serif;
+  font-size: 22px;
+  border-bottom: 2px solid #3b7ef5;
+  padding-bottom: 5px;
+}
+
+.achievements-box ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.achievements-box li {
+  background: #242432;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  transition: 0.3s;
+}
+
+.achievements-box li strong {
+  color: #3b7ef5;
+}
+
+.achievements-box li:hover {
+  background: #3A415A;
+}
+
+/* ===== Conteúdo Extra ===== */
+.extra-content {
+  background: #2C2E40;
+  padding: 20px;
+  border-radius: 12px;
+  color: white;
+  margin-top: 30px;
+  text-align: center;
+}
+
+.extra-content h3 {
+  margin-bottom: 15px;
+  font-family: "Orbitron", sans-serif;
+  font-size: 22px;
+  border-bottom: 2px solid #3b7ef5;
+  padding-bottom: 5px;
+}
+
+.extra-slider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.extra-slider img {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+  background: #242432;
+  padding: 8px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.extra-slider img:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 0px 15px rgba(59, 126, 245, 0.6);
+}
+
+.extra-slider button {
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: #3b7ef5;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.extra-slider button:hover {
+  color: #2a5ed7;
 }
 
 
 
 
+/* ===== Rodapé ===== */
 
-/**footer**/
 footer {
   background-color: #232331; 
   color: white;

@@ -1,0 +1,136 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #444;
+    color: white;
+}
+
+/* Header */
+header {
+    background: purple;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 25px;
+}
+
+header img {
+    height: 40px;
+}
+
+nav a {
+    margin: 0 12px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: yellow;
+}
+
+.search-bar input {
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+}
+
+/* Container principal */
+.container {
+    display: flex;
+    min-height: 80vh;
+    margin: 20px;   /* espaço dos cantos */
+    gap: 20px;      /* espaço entre os blocos */
+}
+
+/* Lista de jogos (lateral esquerda) */
+.lista-jogos {
+    background: lightgreen;
+    width: 250px;
+    padding: 15px;
+    border-radius: 10px;
+
+    /* Scroll interno */
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+/* Itens da lista */
+.lista-jogos ul {
+    list-style: none;
+}
+
+.lista-jogos li {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.lista-jogos img {
+    width: 40px;
+    border-radius: 5px;
+}
+
+/* Jogados recentemente (lado direito) */
+.recentes {
+    flex: 1;
+    background: lightblue;
+    padding: 15px;
+    border-radius: 10px;
+
+    /* Scroll interno */
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+/* Grid dos jogos recentes */
+.grid-recentes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.grid-recentes div {
+    background: pink;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.grid-recentes img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+
+/* Footer */
+footer {
+    background: brown;
+    text-align: center;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+/* Barra de rolagem personalizada */
+.lista-jogos::-webkit-scrollbar,
+.recentes::-webkit-scrollbar {
+    width: 8px;
+}
+
+.lista-jogos::-webkit-scrollbar-thumb,
+.recentes::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+}
+
+.lista-jogos::-webkit-scrollbar-thumb:hover,
+.recentes::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
