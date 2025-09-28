@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 $jogos = [
     ["nome" => "GRIS", "horas" => 6.5, "img" => "../../Img/Jogos/gris.png"],
     ["nome" => "Unpacking", "horas" => 8.5, "img" => "../../Img/Jogos/unpacking.png"],
@@ -78,6 +79,65 @@ $recentes = [
       </div>
     </div>
   </header>
+=======
+// Simulação de dados (depois você puxa do banco)
+$jogos = [
+    ["nome" => "GRIS", "horas" => 12.8, "img" => "img/gris.jpg"],
+    ["nome" => "Undertale", "horas" => 24.6, "img" => "img/undertale.jpg"],
+    ["nome" => "Unpacking", "horas" => 60.8, "img" => "img/unpacking.jpg"],
+    ["nome" => "Anomaly 2", "horas" => 0.0, "img" => "img/anomaly2.jpg"],
+    ["nome" => "Oknytt", "horas" => 12.8, "img" => "img/oknytt.jpg"],
+    ["nome" => "Hollow Knight", "horas" => 109.8, "img" => "img/hollow.jpg"],
+    ["nome" => "Hollow Knight", "horas" => 109.8, "img" => "img/hollow.jpg"],
+    ["nome" => "Hollow Knight", "horas" => 109.8, "img" => "img/hollow.jpg"],
+    ["nome" => "Hollow Knight", "horas" => 109.8, "img" => "img/hollow.jpg"],
+    ["nome" => "Hollow Knight", "horas" => 109.8, "img" => "img/hollow.jpg"],
+    ["nome" => "Hollow Knight", "horas" => 109.8, "img" => "img/hollow.jpg"],
+    ["nome" => "Hollow Knight", "horas" => 109.8, "img" => "img/hollow.jpg"],
+    ["nome" => "Hollow Knight", "horas" => 109.8, "img" => "img/hollow.jpg"],
+    ["nome" => "Hollow Knight", "horas" => 109.8, "img" => "img/hollow.jpg"],
+    ["nome" => "Hollow Knight", "horas" => 109.8, "img" => "img/hollow.jpg"],
+];
+
+$recentes = [
+    ["nome" => "Unpacking", "horas" => 60.8, "img" => "img/unpacking.jpg"],
+    ["nome" => "GRIS", "horas" => 12.8, "img" => "img/gris.jpg"],
+    ["nome" => "Five Night at Freddy's", "horas" => 37.8, "img" => "img/fnaf.jpg"],
+    ["nome" => "Hollow Knight", "horas" => 109.8, "img" => "img/hollow.jpg"],
+    ["nome" => "Hollow Knight", "horas" => 109.8, "img" => "img/hollow.jpg"],
+    ["nome" => "Hollow Knight", "horas" => 109.8, "img" => "img/hollow.jpg"],
+    ["nome" => "Hollow Knight", "horas" => 109.8, "img" => "img/hollow.jpg"],
+    ["nome" => "Hollow Knight", "horas" => 109.8, "img" => "img/hollow.jpg"],
+    ["nome" => "Hollow Knight", "horas" => 109.8, "img" => "img/hollow.jpg"],
+    ["nome" => "Hollow Knight", "horas" => 109.8, "img" => "img/hollow.jpg"],
+    ["nome" => "Hollow Knight", "horas" => 109.8, "img" => "img/hollow.jpg"],
+    ["nome" => "Hollow Knight", "horas" => 109.8, "img" => "img/hollow.jpg"],
+    ["nome" => "Hollow Knight", "horas" => 109.8, "img" => "img/hollow.jpg"],
+    ["nome" => "Hollow Knight", "horas" => 109.8, "img" => "img/hollow.jpg"],
+    ["nome" => "Hollow Knight", "horas" => 109.8, "img" => "img/hollow.jpg"],
+];
+?>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Biblioteca</title>
+    <link rel="stylesheet" href="biblioteca.css">
+</head>
+<body>
+
+<!-- Cabeçalho -->
+<header class="topo">
+    <div class="logo">🎮 SKULL JABB</div>
+    <input type="text" placeholder="Procurar...">
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Loja</a>
+        <a href="#">Suporte</a>
+        <a href="#">🛒</a>
+    </nav>
+</header>
+>>>>>>> f42ab21f7456bcc81b1e446ecdd7d41122e23459
 
 <!-- Container principal -->
 <div class="container">
@@ -113,6 +173,7 @@ $recentes = [
 </div>
 
 <!-- Rodapé -->
+<<<<<<< HEAD
 <footer>
   <div class="social-icons">
     <a href="https://www.instagram.com/skulljabb/" target="_blank"><i class="mdi mdi2 mdi-instagram icone"></i></a>
@@ -120,6 +181,10 @@ $recentes = [
     <a href="mailto:SkullJabb@gmail.com" target="_blank"><i class="mdi mdi2 mdi-email-outline"></i></a>
   </div>
   <p>© 2024 Skull Jabb - Todos os direitos reservados.</p>
+=======
+<footer class="rodape">
+    <p>© 2024 Skull Jabb - Todos os direitos reservados.</p>
+>>>>>>> f42ab21f7456bcc81b1e446ecdd7d41122e23459
 </footer>
 
 </body>
