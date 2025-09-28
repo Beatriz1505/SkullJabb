@@ -161,6 +161,14 @@ height: auto;
 border-radius: 25px;
 }
 
+.img-jogo img{
+    width:  300px;
+    height: auto;
+    border-radius: 10px;
+    display: block;
+    object-fit: cover;
+}
+
 
 
 
