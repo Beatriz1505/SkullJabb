@@ -1,24 +1,7 @@
 <?php
 session_start(); // sempre no topo, antes de qualquer saída
 
-class Conexao {
-    private static $host = "localhost";
-    private static $user = "root";      
-    private static $pass = "";           
-    private static $db   = "skulljabb"; 
-    private static $conn = null;
-
-    public static function getConexao() {
-        if (self::$conn === null) {
-            self::$conn = new mysqli(self::$host, self::$user, self::$pass, self::$db);
-            if (self::$conn->connect_error) {
-                die("Erro na conexão: " . self::$conn->connect_error);
-            }
-        }
-        return self::$conn;
-    }
-}
-
+require_once "../Conexao/Conexao.php";
 $conn = Conexao::getConexao();
 
 // Busca todos os desenvolvedores aprovados junto com dados do cliente
@@ -32,6 +15,17 @@ $result = $conn->query($sql);
 
 // Verificar sessão do usuário
 $usuario = isset($_SESSION['usuario_id']);
+
+
+
+if (!isset($_SESSION['usuario_id'])) {
+    header("Location: ../Login/Login.php");
+    exit;
+}
+
+require_once "../Perfil/ClasseModelagemPerfil.php";
+$perfil = Perfil::buscarPorId($_SESSION['usuario_id']);
+
 ?>
 <!doctype html>
 <html lang="pt-br">
@@ -40,46 +34,39 @@ $usuario = isset($_SESSION['usuario_id']);
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Desenvolvedor</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css">
-  <link rel="shortcut icon" href="../Img/Logo SJ.png" type="image/png">
+  <link rel="shortcut icon" href="../../Img/Elementos/Logo SJ.png" type="image/png">
   <link rel="stylesheet" href="Desenvolvedor.css">
 </head>
 <body>
   
-<header class="navbar">
-  <div class="left-side">
-    <div class="logo">
-      <img src="../Img/Logo SJ.png" alt="Logo">
-      <span>SKULL<br>JABB</span>
-    </div>
+  <header class="navbar">
+            <div class="left-side">
+                <div class="logo">
+                    <a href="../Home/home.png"><img src="../../Img/Elementos/Logo SJ.png" alt="Caveira branca com capuz azul"></a>
+                    <a class="lin" href=""><span>SKULL<br>JABB</span></a>
+                </div>
 
-    <div class="search">
-      <input type="text" placeholder="Procurar...">
-      <a href="#"><i class="mdi mdi-magnify search-icon"></i></a>
-    </div>
-  </div>
+                <div class="search">
+                    <input type="text" placeholder="Procurar...">
+                    <a href="#"><i class="mdi mdi-magnify search-icon"></i></a>
+                </div>
+            </div>
 
-  <div class="nav-links">
-    <a href="../Home/Home.php" class="grif">Home</a>
-    <a href="../Loja/Loja.php">Loja</a>
-    <a href="../Suporte/Suporte.php">Suporte</a>
-  </div>
+            <nav class="nav-links">
+                <a class="grif" href="../Home/Home.php">Home</a> 
+                <a href="../Loja/loja.php">Loja</a>
+                <a href="../Suporte/Suporte.php">Suporte</a> 
+            </nav>
 
-  <div class="icons">
-    <a href="../Carrinho/Carrinho.php"><i class="mdi mdi-cart icone"></i></a>
-
-    <div class="profile">
-      <?php if ($usuario): ?>
-          <a href="../Perfil/Perfil.php">
-            <img src="../Img/Perfil.png" alt="Perfil">
-          </a>
-      <?php else: ?>
-          <a href="../Login/Login.php">
-            <img src="../Img/Perfil.png" alt="Entrar">
-          </a>
-      <?php endif; ?>
-    </div>
-  </div>
-</header>
+            <div class="icons">
+                <a href="../Carrinho/Carrinho.php"><i class="mdi mdi-cart icone"></i></a> <!-- CORRIGI O LINK -->
+                <div class="profile">
+                    <a href="../Perfil/Perfil.php">
+                        <img src="<?= $perfil->foto ? $perfil->foto : '../../Img/Elementos/user.png' ?>" alt="Perfil">
+                    </a>
+                </div>
+            </div>
+        </header>
 
 <main>
   <div class="container">

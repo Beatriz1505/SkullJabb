@@ -210,14 +210,22 @@ body {
   font-size: 16px;
 }
 
-.buy-btn { background: #2873C9; color: white; }
-.buy-btn:hover { background: #ffff; color: black;}
+.buy-btn { background: #2873C9; color: white; 
+transition: 0.3s;}
+.buy-btn:hover { background: #ffff; color: black;
+transition: 0.3s;}
 
-.wishlist-btn { background: #76809B; color: white; }
-.wishlist-btn:hover { background: #ffff; color: black;}
+.wishlist-btn { background: #76809B; color: white; 
+transition: 0.3s;}
+.wishlist-btn:hover { background: #ffff; color: black;
+transition: 0.3s;}
 
-.cart-btn { background: #76809B; color: white; }
-.cart-btn:hover { background: #ffff; color: black;}
+.cart-btn { background: #76809B; color: white; 
+transition: 0.3s;}
+.cart-btn:hover { background: #ffff; color: black;
+transition: 0.3s;
+}
+
 
 /* ===== Descrição ===== */
 .game-description {

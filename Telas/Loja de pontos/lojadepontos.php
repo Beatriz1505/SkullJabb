@@ -1,3 +1,16 @@
+<?php
+session_start();
+require_once "../Conexao/Conexao.php";
+
+if (!isset($_SESSION['usuario_id'])) {
+    header("Location: ../Login/Login.php");
+    exit;
+}
+
+require_once "../Perfil/ClasseModelagemPerfil.php";
+$perfil = Perfil::buscarPorId($_SESSION['usuario_id']);
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -17,32 +30,33 @@
   <div class="content">
     <!-- 🔹 HEADER -->
     <header class="navbar">
-      <div class="left-side">
-        <div class="logo">
-          <a href="#"><img src="../../Img/Elementos/Logo SJ.png" alt="Caveira branca com capuz azul"></a>
-          <a class="lin" href=""><span>SKULL<br>JABB</span></a>
-        </div>
+            <div class="left-side">
+                <div class="logo">
+                    <a href="../Home/home.php"><img src="../../Img/Elementos/Logo SJ.png" alt="Caveira branca com capuz azul"></a>
+                    <a class="lin" href=""><span>SKULL<br>JABB</span></a>
+                </div>
 
-        <div class="search">
-          <input type="text" placeholder="Procurar...">
-          <a href="#"><i class="mdi mdi-magnify search-icon"></i></a>
-        </div>
-      </div>
+                <div class="search">
+                    <input type="text" placeholder="Procurar...">
+                    <a href="#"><i class="mdi mdi-magnify search-icon"></i></a>
+                </div>
+            </div>
 
-      <nav class="nav-links">
-        <a href="#">Home</a>
-        <a href="#">Loja</a>
-        <a href="#">Suporte</a>
-      </nav>
+            <nav class="nav-links">
+                <a class="grif" href="../Home/Home.php">Home</a> 
+                <a href="../Loja/loja.php">Loja</a>
+                <a href="../Suporte/Suporte.php">Suporte</a> 
+            </nav>
 
-      <div class="icons">
-        <a href="#"><i class="mdi mdi-cart icone"></i></a>
-        <div class="profile">
-          <a href="#"><img src="../../Img/Perfis/Artist_.jpeg" alt="Perfil"></a>
-        </div>
-      </div>
-    </header>
-
+            <div class="icons">
+                <a href="../Carrinho/Carrinho.php"><i class="mdi mdi-cart icone"></i></a> <!-- CORRIGI O LINK -->
+                <div class="profile">
+                    <a href="../Perfil/Perfil.php">
+                        <img src="<?= $perfil->foto ? $perfil->foto : '../../Img/Elementos/user.png' ?>" alt="Perfil">
+                    </a>
+                </div>
+            </div>
+        </header>
     <!-- 🔹 CONTEÚDO DA LOJA -->
     <main class="loja-container">
       <h2 class="titulo-loja">LOJA DE PONTOS</h2>
@@ -55,9 +69,10 @@
   <h3 class="title-box">PONTOS:</h3>
   <div class="points-content">
     <img src="../../Img/Elementos/SJ.png" alt="Moeda" class="box-icon">
-    <p class="valor">8.600</p>
+    <p class="valor"><?= $perfil->pontos ?></p>
   </div>
 </div>
+
 
 <!-- BOX DE CHECK-IN -->
 <div class="box checkin-box">

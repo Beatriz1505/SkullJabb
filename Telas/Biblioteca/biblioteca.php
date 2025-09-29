@@ -1,5 +1,6 @@
 <?php
-<<<<<<< HEAD
+session_start();
+
 $jogos = [
     ["nome" => "GRIS", "horas" => 6.5, "img" => "../../Img/Jogos/gris.png"],
     ["nome" => "Unpacking", "horas" => 8.5, "img" => "../../Img/Jogos/unpacking.png"],
@@ -24,6 +25,17 @@ $recentes = [
     ["nome" => "Goat Simulator", "horas" => 12.4, "img" => "../../Img/Jogos/goat.png"],
     ["nome" => "Kyora", "horas" => 6.0, "img" => "../../Img/Jogos/Kyora.png"],
 ];
+
+require_once "../Conexao/Conexao.php";
+
+if (!isset($_SESSION['usuario_id'])) {
+    header("Location: ../Login/Login.php");
+    exit;
+}
+
+require_once "../Perfil/ClasseModelagemPerfil.php";
+$perfil = Perfil::buscarPorId($_SESSION['usuario_id']);
+
 ?>
 
 
@@ -53,91 +65,33 @@ $recentes = [
   <div class="content">
 
    <header class="navbar">
-  <div class="left-side">
-    <div class="logo">
-      <a href="#"><img src="../../Img/Elementos/Logo_SJ.png" alt="Caveira branca com capuz azul"></a>
-      <a class="lin" href=""><span>SKULL<br>JABB</span></a>
-    </div>
+            <div class="left-side">
+                <div class="logo">
+                    <a href="../Home/home.png"><img src="../../Img/Elementos/Logo SJ.png" alt="Caveira branca com capuz azul"></a>
+                    <a class="lin" href=""><span>SKULL<br>JABB</span></a>
+                </div>
 
-    <div class="search">
-      <input type="text" placeholder="Procurar...">
-      <a href="#"><i class="mdi mdi-magnify search-icon"></i></a alt="Pesquisar">
-    </div>
-  </div>
+                <div class="search">
+                    <input type="text" placeholder="Procurar...">
+                    <a href="#"><i class="mdi mdi-magnify search-icon"></i></a>
+                </div>
+            </div>
 
+            <nav class="nav-links">
+                <a class="grif" href="../Home/Home.php">Home</a> 
+                <a href="../Loja/loja.php">Loja</a>
+                <a href="../Suporte/Suporte.php">Suporte</a> 
+            </nav>
 
-    <nav class="nav-links">
-      <a href="#">Home</a>
-      <a href="#">Loja</a>
-      <a href="#">Suporte</a>
-    </nav>
-
-    <div class="icons">
-      <a href="#"><i class="mdi mdi-cart icone"></i></a>
-      <div class="profile">
-        <a href="#"><img src="../../Img/Perfis/Artist_.jpeg" alt="Perfil"></a>
-      </div>
-    </div>
-  </header>
-=======
-// Simulação de dados (depois você puxa do banco)
-$jogos = [
-    ["nome" => "GRIS", "horas" => 12.8, "img" => "img/gris.jpg"],
-    ["nome" => "Undertale", "horas" => 24.6, "img" => "img/undertale.jpg"],
-    ["nome" => "Unpacking", "horas" => 60.8, "img" => "img/unpacking.jpg"],
-    ["nome" => "Anomaly 2", "horas" => 0.0, "img" => "img/anomaly2.jpg"],
-    ["nome" => "Oknytt", "horas" => 12.8, "img" => "img/oknytt.jpg"],
-    ["nome" => "Hollow Knight", "horas" => 109.8, "img" => "img/hollow.jpg"],
-    ["nome" => "Hollow Knight", "horas" => 109.8, "img" => "img/hollow.jpg"],
-    ["nome" => "Hollow Knight", "horas" => 109.8, "img" => "img/hollow.jpg"],
-    ["nome" => "Hollow Knight", "horas" => 109.8, "img" => "img/hollow.jpg"],
-    ["nome" => "Hollow Knight", "horas" => 109.8, "img" => "img/hollow.jpg"],
-    ["nome" => "Hollow Knight", "horas" => 109.8, "img" => "img/hollow.jpg"],
-    ["nome" => "Hollow Knight", "horas" => 109.8, "img" => "img/hollow.jpg"],
-    ["nome" => "Hollow Knight", "horas" => 109.8, "img" => "img/hollow.jpg"],
-    ["nome" => "Hollow Knight", "horas" => 109.8, "img" => "img/hollow.jpg"],
-    ["nome" => "Hollow Knight", "horas" => 109.8, "img" => "img/hollow.jpg"],
-];
-
-$recentes = [
-    ["nome" => "Unpacking", "horas" => 60.8, "img" => "img/unpacking.jpg"],
-    ["nome" => "GRIS", "horas" => 12.8, "img" => "img/gris.jpg"],
-    ["nome" => "Five Night at Freddy's", "horas" => 37.8, "img" => "img/fnaf.jpg"],
-    ["nome" => "Hollow Knight", "horas" => 109.8, "img" => "img/hollow.jpg"],
-    ["nome" => "Hollow Knight", "horas" => 109.8, "img" => "img/hollow.jpg"],
-    ["nome" => "Hollow Knight", "horas" => 109.8, "img" => "img/hollow.jpg"],
-    ["nome" => "Hollow Knight", "horas" => 109.8, "img" => "img/hollow.jpg"],
-    ["nome" => "Hollow Knight", "horas" => 109.8, "img" => "img/hollow.jpg"],
-    ["nome" => "Hollow Knight", "horas" => 109.8, "img" => "img/hollow.jpg"],
-    ["nome" => "Hollow Knight", "horas" => 109.8, "img" => "img/hollow.jpg"],
-    ["nome" => "Hollow Knight", "horas" => 109.8, "img" => "img/hollow.jpg"],
-    ["nome" => "Hollow Knight", "horas" => 109.8, "img" => "img/hollow.jpg"],
-    ["nome" => "Hollow Knight", "horas" => 109.8, "img" => "img/hollow.jpg"],
-    ["nome" => "Hollow Knight", "horas" => 109.8, "img" => "img/hollow.jpg"],
-    ["nome" => "Hollow Knight", "horas" => 109.8, "img" => "img/hollow.jpg"],
-];
-?>
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <title>Biblioteca</title>
-    <link rel="stylesheet" href="biblioteca.css">
-</head>
-<body>
-
-<!-- Cabeçalho -->
-<header class="topo">
-    <div class="logo">🎮 SKULL JABB</div>
-    <input type="text" placeholder="Procurar...">
-    <nav>
-        <a href="#">Home</a>
-        <a href="#">Loja</a>
-        <a href="#">Suporte</a>
-        <a href="#">🛒</a>
-    </nav>
-</header>
->>>>>>> f42ab21f7456bcc81b1e446ecdd7d41122e23459
+            <div class="icons">
+                <a href="../Carrinho/Carrinho.php"><i class="mdi mdi-cart icone"></i></a>
+                <div class="profile">
+                    <a href="../Perfil/Perfil.php">
+                        <img src="<?= $perfil->foto ? $perfil->foto : '../../Img/Elementos/user.png' ?>" alt="Perfil">
+                    </a>
+                </div>
+            </div>
+        </header>
 
 <!-- Container principal -->
 <div class="container">
@@ -173,7 +127,6 @@ $recentes = [
 </div>
 
 <!-- Rodapé -->
-<<<<<<< HEAD
 <footer>
   <div class="social-icons">
     <a href="https://www.instagram.com/skulljabb/" target="_blank"><i class="mdi mdi2 mdi-instagram icone"></i></a>
@@ -181,10 +134,6 @@ $recentes = [
     <a href="mailto:SkullJabb@gmail.com" target="_blank"><i class="mdi mdi2 mdi-email-outline"></i></a>
   </div>
   <p>© 2024 Skull Jabb - Todos os direitos reservados.</p>
-=======
-<footer class="rodape">
-    <p>© 2024 Skull Jabb - Todos os direitos reservados.</p>
->>>>>>> f42ab21f7456bcc81b1e446ecdd7d41122e23459
 </footer>
 
 </body>

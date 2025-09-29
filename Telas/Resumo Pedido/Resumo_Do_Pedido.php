@@ -1,11 +1,10 @@
 <?php
 session_start();
-$_SESSION['ID_cliente'] = 1; // teste sem login
 
-$ID_cliente = $_SESSION['ID_cliente'] ?? null;
-if (!$ID_cliente) {
-    echo "Usuário não logado!";
-    exit;
+$ID_cliente = $_SESSION['usuario_id'] ?? null;
+if(!$ID_cliente){ 
+    echo "Usuário não logado!"; 
+    exit; 
 }
 
 include_once 'Resumo_Pedido.php';

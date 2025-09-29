@@ -1,5 +1,14 @@
 <?php
 session_start();
+require_once "../Conexao/Conexao.php";
+
+if (!isset($_SESSION['usuario_id'])) {
+    header("Location: ../Login/Login.php");
+    exit;
+}
+
+require_once "../Perfil/ClasseModelagemPerfil.php";
+$perfil = Perfil::buscarPorId($_SESSION['usuario_id']);
 
 // ===== CONEXÃO COM BANCO =====
 $host = "localhost";
@@ -39,7 +48,12 @@ $sqlJogos = "
     WHERE jg.Id_Gen = $idGenero
 ";
 $resJogos = $conn->query($sqlJogos);
+require_once "ClasseModelagemGenero.php";
+
+$generos = Genero::listarTodos();
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,7 +63,7 @@ $resJogos = $conn->query($sqlJogos);
     <title><?= $nomeGenero ?> - Skull Jabb</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="Genero.css">
-    <link rel="shortcut icon" href="../../Img/Elementos/Logo_SJ.png" sizes="64x64" type="image/x-icon">
+    <link rel="shortcut icon" href="../../Img/Elementos/Logo SJ.png" sizes="64x64" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css"> 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -60,29 +74,29 @@ $resJogos = $conn->query($sqlJogos);
 <body>
 
 <div class="content">
-<header class="navbar">
-  <div class="left-side">
-    <div class="logo">
-      <a href="#"><img src="../../Img/Elementos/Logo_SJ.png" alt="Caveira branca com capuz azul"></a>
-      <a class="lin" href=""><span>SKULL<br>JABB</span></a>
+  <header class="navbar">
+    <div class="left-side">
+      <div class="logo">
+        <a href="#"><img src="../../Img/Elementos/Logo SJ.png" alt="Caveira branca com capuz azul"></a>
+        <a class="lin" href=""><span>SKULL<br>JABB</span></a>
+      </div>
+      <div class="search">
+        <input type="text" placeholder="Procurar...">
+        <a href="#"><i class="mdi mdi-magnify search-icon"></i></a>
+      </div>
     </div>
-    <div class="search">
-      <input type="text" name="buscar" placeholder="Procurar...">
-      <a href="#"><i class="mdi mdi-magnify search-icon"></i></a>
+    <nav class="nav-links">
+      <a href="../Home/home.php">Home</a>
+      <a href="../Loja/loja.php">Loja</a>
+      <a href="../Suporte/suporte.php">Suporte</a>
+    </nav>
+    <div class="icons">
+      <a href="#"><i class="mdi mdi-cart icone"></i></a>
+      <div class="profile">
+        <a href="../Perfil/perfil.php"><img src="<?= $perfil->foto ? $perfil->foto : '../../Img/Elementos/user.png' ?>" alt="Perfil"></a>
+      </div>
     </div>
-  </div>
-  <nav class="nav-links">
-      <a href="home.php">Home</a>
-      <a href="loja.php">Loja</a>
-      <a href="suporte.php">Suporte</a>
-  </nav>
-  <div class="icons">
-    <a href="../carrinho/carrinho.php"><i class="mdi mdi-cart icone"></i></a>
-    <div class="profile">
-      <!-- Perfil futuramente -->
-    </div>
-  </div>
-</header>
+  </header>
 </div>
 
 <div class="container">
@@ -94,7 +108,7 @@ $resJogos = $conn->query($sqlJogos);
       <div class="text-group">
         <h2><?= $nomeGenero ?></h2>
         <?php if ($bannerJogo): ?>
-          <a href="detalhes_jogo.php?id=<?= $bannerJogo['ID_jogo'] ?>">
+          <a href="../Tela de Jogos/teladejogos.php?id=<?= $bannerJogo['ID_jogo'] ?>">
             <button class="descubra-btn">Descubra</button>
           </a>
         <?php endif; ?>
@@ -112,9 +126,20 @@ $resJogos = $conn->query($sqlJogos);
 
 <!-- Botões de navegação -->
 <section class="nave-buttons">
-  <button>Loja de pontos</button>
-  <button>Categorias</button>
-  <button>Informações</button>
+    <a href=""><button>Loja de pontos</button></a>
+
+    <div class="dropdown">
+        <button class="dropbtn">Categorias</button>
+        <div class="dropdown-content">
+            <?php foreach ($generos as $g): ?>
+                <a href="../Genero/Genero.php?id=<?= $g->id_gen ?>">
+                    <?= $g->nome ?>
+                </a>
+            <?php endforeach; ?>
+        </div>
+    </div>
+
+    <a href=""><button>Informações</button></a>
 </section>
 
 <!-- Carrossel de jogos -->
@@ -132,7 +157,7 @@ $resJogos = $conn->query($sqlJogos);
                     <div class="d-flex justify-content-center gap-5">
               <?php endif; ?>
 
-                      <a href="detalhes_jogo.php?id=<?= $jogo['ID_jogo'] ?>">
+                      <a href="../Tela de Jogos/teladejogos.php?id=<?= $jogo['ID_jogo'] ?>">
                         <img class="jogos" src="<?= $jogo['Img'] ?>" alt="<?= $jogo['nome'] ?>">
                       </a>
 

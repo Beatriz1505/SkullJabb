@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 require_once "../Conexao/Conexao.php"; 
 $conn = Conexao::getConexao();
 
@@ -17,12 +18,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($result && $result->num_rows === 1) {
         $usuario = $result->fetch_assoc();
+        $senha_bd = $usuario['senha'];
+        $login_ok = false;
 
-        if (password_verify($senha, $usuario['senha'])) {
+        // Se a senha do banco for hash válido
+        if (strlen($senha_bd) > 20 && password_verify($senha, $senha_bd)) {
+            $login_ok = true;
+
+            // Se precisar atualizar o hash (ex: algoritmo novo)
+            if (password_needs_rehash($senha_bd, PASSWORD_DEFAULT)) {
+                $novo_hash = password_hash($senha, PASSWORD_DEFAULT);
+                $upd = $conn->prepare("UPDATE cliente SET senha = ? WHERE ID_cliente = ?");
+                $upd->bind_param("si", $novo_hash, $usuario['ID_cliente']);
+                $upd->execute();
+                $upd->close();
+            }
+        } 
+        // Se for senha salva em texto puro
+        elseif ($senha === $senha_bd) {
+            $login_ok = true;
+
+            // Migra para hash seguro
+            $novo_hash = password_hash($senha, PASSWORD_DEFAULT);
+            $upd = $conn->prepare("UPDATE cliente SET senha = ? WHERE ID_cliente = ?");
+            $upd->bind_param("si", $novo_hash, $usuario['ID_cliente']);
+            $upd->execute();
+            $upd->close();
+        }
+
+        if ($login_ok) {
             $_SESSION['usuario_id'] = $usuario['ID_cliente'];
             $_SESSION['nome']       = $usuario['nome'];
             $_SESSION['email']      = $usuario['email'];
             $_SESSION['pontos']     = $usuario['pontos'];
+            $_SESSION['foto']       = $usuario['foto'];
 
             echo "<script>
                     alert('Login realizado com sucesso!');
@@ -35,16 +64,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $erro = "Usuário não encontrado!";
     }
+
+    $stmt->close();
 }
 ?>
-
 <!doctype html>
 <html lang="pt-br">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Login</title>
-    <link rel="shortcut icon" href="../Img/Elementos/Logo SJ.png" type="image/png">
+    <link rel="shortcut icon" href="../../Img/Elementos/Logo SJ.png" type="image/png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="../Login/Login.css">
 </head>
@@ -53,7 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <header class="navbar">
   <div class="left-side">
     <div class="logo">
-      <img src="../Img/Elementos/Logo SJ.png" alt="Logo">
+      <img src="../../Img/Elementos/Logo SJ.png" alt="Logo">
       <span>SKULL<br>JABB</span>
     </div>
 
@@ -67,22 +97,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <a href="../Home/Home.php" class="grif">Home</a>
     <a href="../Loja/Loja.php">Loja</a>
     <a href="../Suporte/Suporte.php">Suporte</a>
-  </div>
-
-  <div class="icons">
-    <a href="../Carrinho/Carrinho.php"><i class="mdi mdi-cart icone"></i></a>
-
-    <div class="profile">
-      <?php if (isset($_SESSION['usuario_id'])): ?>
-          <a href="../Perfil/Perfil.php">
-            <img src="../Img/Perfis/Perfil.png" alt="Perfil">
-          </a>
-      <?php else: ?>
-          <a href="../Login/Login.php">
-            <img src="../Img/Perfis/Perfil.png" alt="Entrar">
-          </a>
-      <?php endif; ?>
-    </div>
   </div>
 </header>
 

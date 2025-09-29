@@ -1,5 +1,5 @@
 <?php 
-include_once '../../Conexao/Conectar.php';
+include_once '../Conexao/Conectar.php';
 
 class Resumo_Pedido {
     private $ID_pedido;
@@ -14,7 +14,7 @@ class Resumo_Pedido {
     public function __construct($ID_cliente = null, $ID_pedido = null) {
         $this->ID_cliente = $ID_cliente;
         $this->ID_pedido = $ID_pedido;
-        $this->conn = Conectar::getInstance();
+        $this->conn = Conexao::getConexao();
     }
 
     // ================= Setters =================

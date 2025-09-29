@@ -1,5 +1,15 @@
 <?php
-session_start(); // INICIA SESSÃO
+session_start();
+
+require_once "../Conexao/Conexao.php";
+
+if (!isset($_SESSION['usuario_id'])) {
+    header("Location: ../Login/Login.php");
+    exit;
+}
+
+require_once "../Perfil/ClasseModelagemPerfil.php";
+$perfil = Perfil::buscarPorId($_SESSION['usuario_id']);
 
 // ===== CONEXÃO COM BANCO =====
 $host = "localhost";
@@ -31,15 +41,11 @@ $sql = "
     GROUP BY j.id_jogo, j.nome, j.preco, j.desconto, j.img
 ";
 
-// Prepara a query
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $id);
 $stmt->execute();
-
-// Pega o resultado
 $result = $stmt->get_result();
-$jogo = $result->fetch_assoc(); // agora usamos $jogo direto
-
+$jogo = $result->fetch_assoc();
 $stmt->close();
 
 if (!$jogo) {
@@ -52,13 +58,13 @@ $desconto = $jogo['desconto'];
 $precoFinal = $desconto ? $preco - ($preco * ($desconto / 100)) : $preco;
 
 // ===== VERIFICA SE O USUÁRIO ESTÁ LOGADO =====
-$id_cliente = isset($_SESSION['id_cliente']) ? $_SESSION['id_cliente'] : 0;
+$id_cliente = isset($_SESSION['usuario_id']) ? $_SESSION['usuario_id'] : 0;
 
 // ===== BOTÕES DE AÇÃO =====
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (!$id_cliente) {
-        header("Location: teladejogo.php?id=$id&msg=Você precisa fazer login ou cadastrar-se");
+        header("Location: teladejogos.php?id=$id&msg=Você precisa fazer login ou cadastrar-se");
         exit;
     }
 
@@ -69,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             $conn->query("INSERT INTO carrinho (ID_cliente, ID_jogo, quantidade) VALUES ($id_cliente, $id, 1)");
         }
-        header("Location: teladejogo.php?id=$id&msg=Adicionado ao carrinho");
+        header("Location: teladejogos.php?id=$id&msg=Adicionado ao carrinho");
         exit;
     }
 
@@ -78,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($check->num_rows == 0) {
             $conn->query("INSERT INTO lista_desejo (ID_cliente, ID_jogo) VALUES ($id_cliente, $id)");
         }
-        header("Location: teladejogo.php?id=$id&msg=Adicionado à lista de desejos");
+        header("Location: teladejogos.php?id=$id&msg=Adicionado à lista de desejos");
         exit;
     }
 
@@ -100,75 +106,52 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 VALUES ($id_cliente, $id, $nota, '$comentario')";
         $conn->query($sql);
 
-        header("Location: teladejogo.php?id=$id&msg=Avaliação enviada com sucesso!");
+        header("Location: teladejogos.php?id=$id&msg=Avaliação enviada com sucesso!");
         exit;
     }
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
-
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= htmlspecialchars($jogo['nome']) ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="teladejogo.css">
-    <link rel="shortcut icon" href="../../Img/Elementos/Logo_SJ.png"sizes="64x64" type="image/x-icon">
+    <link rel="shortcut icon" href="../../Img/Elementos/Logo SJ.png"sizes="64x64" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css"> 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
-
 </head>
-
-
 <body>
 
-    <div class="content">
-
-<header class="navbar">
-  <div class="left-side">
-    <div class="logo">
-      <a href="#"><img src="../../Img/Elementos/Logo_SJ.png" alt="Caveira branca com capuz azul"></a>
-      <a class="lin" href=""><span>SKULL<br>JABB</span></a>
-    </div>
-    <div class="search">
-      <input type="text" name="buscar" placeholder="Procurar...">
-      <a href="#"><i class="mdi mdi-magnify search-icon"></i></a>
-    </div>
-  </div>
-  <nav class="nav-links">
-      <a href="home.php">Home</a>
-      <a href="loja.php">Loja</a>
-      <a href="suporte.php">Suporte</a>
-  </nav>
-  <div class="icons">
-    <a href="../carrinho/carrinho.php"><i class="mdi mdi-cart icone"></i></a>
-    <div class="profile">
-
- <!-- Adicionar o perfil aqui-->   
-    </div>
-  </div>
-</header>
-
-  </div>
-
-    <div vw class="enabled">
-        <div vw-access-button class="active"></div>
-        <div vw-plugin-wrapper>
-          <div class="vw-plugin-top-wrapper"></div>
-        </div>
+<div class="content">
+  <header class="navbar">
+    <div class="left-side">
+      <div class="logo">
+        <a href="#"><img src="../../Img/Elementos/Logo SJ.png" alt="Caveira branca com capuz azul"></a>
+        <a class="lin" href=""><span>SKULL<br>JABB</span></a>
       </div>
-     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-      <script>
-        new window.VLibras.Widget('https://vlibras.gov.br/app');
-      </script>
+      <div class="search">
+        <input type="text" placeholder="Procurar...">
+        <a href="#"><i class="mdi mdi-magnify search-icon"></i></a>
+      </div>
+    </div>
+    <nav class="nav-links">
+      <a href="../Home/home.php">Home</a>
+      <a href="../Loja/loja.php">Loja</a>
+      <a href="../Suporte/suporte.php">Suporte</a>
+    </nav>
+    <div class="icons">
+      <a href="../Carrinho/carrinho.php"><i class="mdi mdi-cart icone"></i></a>
+      <div class="profile">
+        <a href="../Perfil/perfil.php"><img src="<?= $perfil->foto ? $perfil->foto : '../../Img/Elementos/user.png' ?>" alt="Perfil"></a>
+      </div>
+    </div>
+  </header>
+</div>
 
-<!-- CONTEÚDO -->
 <main class="container">
     <div class="card-jogo">
         <div class="img-jogo">
@@ -205,7 +188,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!-- Descrição -->
     <div class="game-description">
         <h3>Descrição</h3>
-        <p><?= htmlspecialchars($jogo['nome']) ?> é um jogo do gênero <?= strtolower(htmlspecialchars($jogo['generos'] ?? 'não informado')) ?> disponível na nossa loja. Aproveite para jogar com desconto exclusivo se disponível!</p>
+        <p><?= htmlspecialchars($jogo['nome']) ?> é um jogo do gênero <?= strtolower(htmlspecialchars($jogo['generos'] ?? 'não informado')) ?> disponível na nossa loja.</p>
 
         <?php
         $sqlMedia = "SELECT AVG(nota) as media, COUNT(*) as total FROM avaliacao WHERE ID_jogo = $id";
@@ -226,10 +209,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <!-- Avaliações -->
         <div class="chat-box">
             <h3>Avaliações</h3>
-
             <div class="messages">
                 <?php
-                $sqlAval = "SELECT a.comentario, a.nota, a.data_avaliacao, c.nome 
+                $sqlAval = "SELECT a.comentario, a.nota, a.data_avaliacao, c.usuario 
                             FROM avaliacao a
                             JOIN cliente c ON a.ID_cliente = c.ID_cliente
                             WHERE a.ID_jogo = $id
@@ -238,7 +220,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 if ($resAval->num_rows > 0) {
                     while ($row = $resAval->fetch_assoc()) {
-                        echo "<p><strong>{$row['nome']} ({$row['nota']}/5):</strong> {$row['comentario']} 
+                        echo "<p><strong>{$row['usuario']} ({$row['nota']}/5):</strong> {$row['comentario']} 
                               <br><small>{$row['data_avaliacao']}</small></p>";
                     }
                 } else {
@@ -265,20 +247,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php endif; ?>
         </div>
 
-        <?php if ($id_cliente): ?>
-        <div class="achievements-box">
-            <h3>Conquistas</h3>
-            <ul>
-                <li><strong>Primeiro Chefe:</strong> Derrote o primeiro boss</li>
-                <li><strong>Perfeição:</strong> Vença sem tomar dano</li>
-                <li><strong>Velocista:</strong> Termine uma fase em menos de 2 minutos</li>
-            </ul>
-        </div>
-        <?php endif; ?>
-    </div>
+
+<!-- Conquistas puxadas do BD -->
+<div class="achievements-box">
+    <h3>Conquistas</h3>
+    <ul>
+        <?php
+        $sqlConq = "SELECT nome, descricao 
+                    FROM conquista 
+                    WHERE ID_jogo = $id";
+        $resConq = $conn->query($sqlConq);
+
+        if ($resConq->num_rows > 0) {
+            while ($conq = $resConq->fetch_assoc()) {
+                echo "<li><strong>" . htmlspecialchars($conq['nome']) . ":</strong> " . htmlspecialchars($conq['descricao']) . "</li>";
+            }
+        } else {
+            echo "<li>Este jogo ainda não possui conquistas cadastradas.</li>";
+        }
+        ?>
+    </ul>
+</div>
+
 </main>
 
-<!-- FOOTER -->
 <footer>
     <div class="social-icons">
         <a href="#"><i class="mdi mdi-instagram"></i></a>

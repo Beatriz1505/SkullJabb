@@ -1,5 +1,5 @@
 <?php
-include_once '../../Conexao/Conectar.php';
+include_once '../Conexao/Conexao.php';
 
 class Pedido_Item {
     private $ID_item;
@@ -12,7 +12,7 @@ class Pedido_Item {
         $this->ID_pedido = $ID_pedido;
         $this->ID_jogo = $ID_jogo;
         $this->quantidade = $quantidade;
-        $this->conn = Conectar::getInstance();
+        $this->conn = Conexao::getConexao();
     }
 
     // Setters

@@ -26,3 +26,30 @@ function applyBorder(img) {
     }
   }
 }
+
+document.getElementById("abrir-popup").addEventListener("click", (e) => {
+  e.preventDefault();
+  document.getElementById("popup-editar").style.display = "flex";
+});
+
+document.getElementById("fechar-popup").addEventListener("click", () => {
+  document.getElementById("popup-editar").style.display = "none";
+});
+
+// Preview da imagem
+document.getElementById("foto-upload").addEventListener("change", function() {
+  const file = this.files[0];
+  if (file) {
+    document.getElementById("preview").src = URL.createObjectURL(file);
+  }
+});
+
+// Seleção de moldura
+document.querySelectorAll(".moldura").forEach((m, index) => {
+  m.addEventListener("click", () => {
+    document.querySelectorAll(".moldura").forEach(el => el.classList.remove("ativa"));
+    m.classList.add("ativa");
+    document.getElementById("moldura-escolhida").value = index + 1;
+  });
+});
+

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 27/09/2025 às 04:38
+-- Tempo de geração: 29/09/2025 às 05:10
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -19,7 +19,6 @@ SET time_zone = "+00:00";
 
 --
 -- Banco de dados: `skulljabb`
---
 CREATE DATABASE IF NOT EXISTS `skulljabb` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `skulljabb`;
 
@@ -37,6 +36,13 @@ CREATE TABLE `avaliacao` (
   `comentario` text DEFAULT NULL,
   `data_avaliacao` datetime DEFAULT current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `avaliacao`
+--
+
+INSERT INTO `avaliacao` (`ID_avaliacao`, `ID_cliente`, `ID_jogo`, `nota`, `comentario`, `data_avaliacao`) VALUES
+(10, 4, 19, 4, 'Interessante', '2025-09-28 23:01:49');
 
 -- --------------------------------------------------------
 
@@ -56,9 +62,9 @@ CREATE TABLE `carrinho` (
 --
 
 INSERT INTO `carrinho` (`ID_carrinho`, `ID_cliente`, `ID_jogo`, `quantidade`) VALUES
-(1, 1, 1, 1),
-(2, 1, 2, 2),
-(3, 1, 4, 1);
+(20, 3, 10, 1),
+(19, 2, 44, 1),
+(22, 3, 11, 1);
 
 -- --------------------------------------------------------
 
@@ -68,19 +74,25 @@ INSERT INTO `carrinho` (`ID_carrinho`, `ID_cliente`, `ID_jogo`, `quantidade`) VA
 
 CREATE TABLE `cliente` (
   `ID_cliente` int(11) NOT NULL,
-  `email` varchar(100) NOT NULL,
+  `email` varchar(70) NOT NULL,
   `CPF` varchar(14) NOT NULL,
-  `nome` varchar(100) NOT NULL,
+  `nome` varchar(70) NOT NULL,
   `senha` varchar(255) NOT NULL,
-  `pontos` int(11) DEFAULT 0
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `pontos` int(11) NOT NULL DEFAULT 50,
+  `usuario` varchar(70) NOT NULL,
+  `foto` varchar(255) NOT NULL DEFAULT '../../Img/Perfis/none.png',
+  `moldura` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `cliente`
 --
 
-INSERT INTO `cliente` (`ID_cliente`, `email`, `CPF`, `nome`, `senha`, `pontos`) VALUES
-(1, 'teste@teste.com', '12345678900', 'Teste', '123456', 0);
+INSERT INTO `cliente` (`ID_cliente`, `email`, `CPF`, `nome`, `senha`, `pontos`, `usuario`, `foto`, `moldura`) VALUES
+(1, 'galdinob596@gmail.com', '501.988.228-85', 'Bea', '$2y$10$FfLDzgzMPTt10nkYi6VWOeXevDDlwdeVJ6IaoeiFpSZ70FpA1b63O', 50, 'Bellatrizx', '../../Img/Perfis/User 03.jpeg', '../../Img/Loja de Pontos/moldura_cogumelo.png'),
+(2, 'jeeh_iero@yahoo.com.br', '123.456.789-12', 'dies', '$2y$10$m6NKIXxw/4nmaI/zEkYkfuZzXK4n/L6OJtWIbRriPPxvxuEZjf.9q', 50, 'dies', '../../Img/Perfis/none.png', ''),
+(3, 'EstherGaldino@gmail.com', '212.252.365-78', 'Esther', '$2y$10$s4yp9GD50NlcBIi24y26IOFfclbqMyuPTG9oEyiRS3oEnD.SfIrb6', 50, 'steh', '../../Img/Perfis/Artist_.jpeg', '../../Img/Loja de Pontos/moldura_cogumelo.png'),
+(4, 'Teste@gmail.com', '000.000.000-00', 'Beatriz', '$2y$10$cqp3sK5E5GrWUdVo3wgaH.wV2NNdWDgreVkjKzmrA9QVX43quElDe', 50, 'bea', '../../Img/Perfis/User 03.jpeg', '../../Img/Loja de Pontos/moldura_coracao.png');
 
 -- --------------------------------------------------------
 
@@ -149,6 +161,13 @@ CREATE TABLE `desenvolvedor` (
   `portfolio` varchar(500) DEFAULT NULL,
   `data_inscricao` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `desenvolvedor`
+--
+
+INSERT INTO `desenvolvedor` (`ID_desenvolvedor`, `ID_cliente`, `descricao`, `status`, `portfolio`, `data_inscricao`) VALUES
+(2, 2, 'Quero virar fodinha', 0, NULL, '2025-09-28 20:48:39');
 
 -- --------------------------------------------------------
 
@@ -226,7 +245,6 @@ CREATE TABLE `jogo` (
 
 INSERT INTO `jogo` (`ID_jogo`, `nome`, `preco`, `desconto`, `Img`) VALUES
 (1, 'Cuphead', 36.00, NULL, '../../Img/Jogos/cuphead.png'),
-(2, 'Blue Prince', 62.00, 66.00, '../../Img/Jogos/blue_prince.png'),
 (3, 'Hollow Knight', 150.00, NULL, '../../Img/Jogos/hollow_knight.png'),
 (4, 'Five Nights at Freddy´s: Into The Pit', 41.00, 30.00, '../../Img/Jogos/into_the_pit.png'),
 (5, 'Train SImulator', 90.00, 10.00, '../../Img/Jogos/train.png\r\n'),
@@ -236,7 +254,7 @@ INSERT INTO `jogo` (`ID_jogo`, `nome`, `preco`, `desconto`, `Img`) VALUES
 (9, 'Rimworld', 95.00, 5.00, '../../Img/Jogos/rimworld.png\r\n'),
 (10, 'Reaper ', 15.00, 10.00, '../../Img/Jogos/reaper.png\r\n'),
 (11, 'Project Zomboid ', 55.00, 10.00, '../../Img/Jogos/project_zomboid.png\r\n'),
-(12, 'Phasmofobia', 50.00, 5.00, '../../Img/Jogos/phasmofobia.png\r\n'),
+(12, 'Phasmophobia', 50.00, 5.00, '../../Img/Jogos/phasmophobia.png\r\n'),
 (13, 'PC Building ', 50.00, 5.00, '../../Img/Jogos/pc_building.png\r\n'),
 (14, 'Oknytt', 15.00, 5.00, '../../Img/Jogos/oknytt.png\r\n'),
 (15, 'Limbo ', 30.00, 0.00, '../../Img/Jogos/limbo.png\r\n'),
@@ -247,22 +265,19 @@ INSERT INTO `jogo` (`ID_jogo`, `nome`, `preco`, `desconto`, `Img`) VALUES
 (20, 'Game Dev Tycoon ', 27.00, 0.00, '../../Img/Jogos/game_dev.png\r\n'),
 (21, 'Fishing Planet ', 0.00, 0.00, '../../Img/Jogos/fishing_planet.png\r\n'),
 (22, 'Euro Truck 2 ', 58.00, 0.00, '../../Img/Jogos/euro_truck.png\r\n'),
-(23, 'Don\'t Starve Together ', 25.00, 0.00, '../../Img/Jogos/dont_starver_together_extra.png'),
+(23, 'Don\'t Starve Together ', 25.00, 0.00, '../../Img/Jogos/dont_starve_together.png\r\n'),
 (24, 'Dead Cells', 45.00, 0.00, '../../Img/Jogos/dead_cells.png\r\n'),
 (25, 'Cooking Simulator', 50.00, 25.00, '../../Img/Jogos/cooking.png\r\n'),
 (26, 'Cities Slylines 2', 150.00, 25.00, '../../Img/Jogos/cities_skyline.png\r\n'),
 (27, 'Celeste ', 50.00, 15.00, '../../Img/Jogos/celeste.png\r\n'),
-(28, 'BeamNG.drive', 45.00, 15.00, '../../Img/Jogos/car.png\r\n'),
 (29, 'Bus Simulator 21', 100.00, 15.00, '../../Img/Jogos/bus.png\r\n'),
 (30, 'Buckshot Roulette', 8.00, 0.00, '../../Img/Jogos/buckshot_roulette.png\r\n'),
 (31, 'Banished ', 30.00, 0.00, '../../Img/Jogos/banished.png\r\n'),
-(32, 'Valorant ', 0.00, 0.00, '../../Img/Jogos/Valorant.jpg'),
 (33, 'Assassin\'s Creed ', 30.00, 0.00, '../../Img/Jogos/AssassinsCreed.jpg'),
 (34, 'Unpacking', 15.00, 0.00, '../../Img/Jogos/unpacking.png'),
 (35, 'Resident Evil 6', 10.00, 0.00, '../../Img/Jogos/resident_evil.png\r\n'),
 (36, 'Need for Speed', 30.00, 0.00, '../../Img/Jogos/need_for_speed.png'),
 (37, 'Moonlighter', 35.00, 0.00, '../../Img/Jogos/moonlighter.png'),
-(38, 'League Of Legends', 0.00, 0.00, '../../Img/Jogos/LeagueOfLegends.jpg'),
 (39, 'Have a Nice Death', 20.00, 0.00, '../../Img/Jogos/have_a_nice_death.png'),
 (40, 'Goat', 15.00, 0.00, '../../Img/Jogos/goat.png'),
 (41, 'Fortnite', 0.00, 0.00, '../../Img/Jogos/Fortnite.jpg'),
@@ -333,61 +348,7 @@ INSERT INTO `jogo_genero` (`ID_jogo`, `Id_Gen`) VALUES
 (43, 5),
 (44, 3),
 (45, 1),
-(46, 8),
-(1, 8),
-(1, 1),
-(2, 2),
-(3, 14), 
-(3, 8),
-(4, 19),
-(7, 7),
-(8, 20),
-(9, 23),
-(10, 1),
-(11, 23),
-(11, 19),
-(12, 17),
-(14, 22),
-(15, 22),
-(15, 8),
-(16, 17),
-(18, 14),
-(18, 8),
-(19, 22),
-(19, 8),
-(20, 20),
-(22, 7),
-(22, 5),
-(23, 23),
-(24, 14),
-(24, 8),
-(26, 5),
-(27, 25),
-(28, 5),
-(29, 5),
-(30, 21),
-(31, 23),
-(32, 13),
-(33, 1),
-(33, 14),
-(34, 25),
-(35, 1),
-(36, 1),
-(37, 14),
-(37, 3),
-(39, 14), 
-(39, 8),
-(40, 25),
-(41, 17),
-(42, 9),
-(42, 25),
-(44, 5),
-(44, 20),
-(45, 22),
-(46, 9),
-(46, 1);
-
-
+(46, 8);
 
 -- --------------------------------------------------------
 
@@ -405,10 +366,13 @@ CREATE TABLE `lista_desejo` (
 --
 
 INSERT INTO `lista_desejo` (`ID_cliente`, `ID_jogo`) VALUES
-(1, 1),
 (1, 2),
-(1, 3),
-(1, 4);
+(2, 16),
+(2, 21),
+(2, 43),
+(3, 11),
+(3, 18),
+(4, 19);
 
 -- --------------------------------------------------------
 
@@ -422,6 +386,13 @@ CREATE TABLE `pedido_item` (
   `ID_jogo` int(11) NOT NULL,
   `quantidade` int(11) NOT NULL DEFAULT 1
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `pedido_item`
+--
+
+INSERT INTO `pedido_item` (`ID_item`, `ID_pedido`, `ID_jogo`, `quantidade`) VALUES
+(1, 1, 43, 1);
 
 -- --------------------------------------------------------
 
@@ -438,6 +409,13 @@ CREATE TABLE `resumo_pedido` (
   `total` decimal(10,2) NOT NULL,
   `ID_cupom` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `resumo_pedido`
+--
+
+INSERT INTO `resumo_pedido` (`ID_pedido`, `ID_cliente`, `data_pedido`, `status`, `metodo_pagamento`, `total`, `ID_cupom`) VALUES
+(1, 2, '2025-09-28 16:55:06', 'pendente', 'pix', 45.00, NULL);
 
 --
 -- Índices para tabelas despejadas
@@ -460,7 +438,9 @@ ALTER TABLE `carrinho`
 -- Índices de tabela `cliente`
 --
 ALTER TABLE `cliente`
-  ADD PRIMARY KEY (`ID_cliente`);
+  ADD PRIMARY KEY (`ID_cliente`),
+  ADD UNIQUE KEY `CPF` (`CPF`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Índices de tabela `cliente_conquista`
@@ -536,19 +516,19 @@ ALTER TABLE `resumo_pedido`
 -- AUTO_INCREMENT de tabela `avaliacao`
 --
 ALTER TABLE `avaliacao`
-  MODIFY `ID_avaliacao` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_avaliacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de tabela `carrinho`
 --
 ALTER TABLE `carrinho`
-  MODIFY `ID_carrinho` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID_carrinho` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de tabela `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `ID_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `conquista`
@@ -566,7 +546,7 @@ ALTER TABLE `cupom`
 -- AUTO_INCREMENT de tabela `desenvolvedor`
 --
 ALTER TABLE `desenvolvedor`
-  MODIFY `ID_desenvolvedor` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_desenvolvedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `genero`
@@ -590,13 +570,13 @@ ALTER TABLE `jogo`
 -- AUTO_INCREMENT de tabela `pedido_item`
 --
 ALTER TABLE `pedido_item`
-  MODIFY `ID_item` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_item` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `resumo_pedido`
 --
 ALTER TABLE `resumo_pedido`
-  MODIFY `ID_pedido` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

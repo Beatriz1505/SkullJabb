@@ -20,7 +20,7 @@ html, body {
     height: 100%;
     font-family: 'Orbitron', sans-serif;
     color: var(--font-color);
-    background-image: url('../Img/Background.jpeg');
+    background-image: url('../../Img/Elementos/skulljabb_fundo_azul_games.png');
     background-repeat: no-repeat;
     background-color: #242432;
     background-size: cover;

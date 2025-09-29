@@ -3,10 +3,11 @@ session_start();
 require_once "../Conexao/Conexao.php";
 $conn = Conexao::getConexao();
 
+
 $usuario = null;
 if (isset($_SESSION['ID_cliente'])) {
     $id = $_SESSION['ID_cliente'];
-    $sql = "SELECT nome FROM cliente WHERE ID_cliente = ?";
+    $sql = "SELECT nome FROM cliente WHERE ID_cliente = ? LIMIT 1";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $id);
     $stmt->execute();
@@ -16,6 +17,7 @@ if (isset($_SESSION['ID_cliente'])) {
     }
     if ($stmt) $stmt->close();
 }
+
 
 $erro = null;
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -32,20 +34,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bind_param("ss", $email, $cpf);
         $stmt->execute();
         $res = $stmt->get_result();
+
         if ($res && $res->num_rows > 0) {
             $erro = "E-mail ou CPF já cadastrado.";
             $stmt->close();
         } else {
             $stmt->close();
-            $senha = password_hash($senha_plain, PASSWORD_DEFAULT);
+
+            
+            $senha_hash = password_hash($senha_plain, PASSWORD_DEFAULT);
+
             $sql = "INSERT INTO cliente (email, CPF, nome, senha) VALUES (?, ?, ?, ?)";
             $stmt = $conn->prepare($sql);
             if ($stmt === false) {
                 $erro = "Erro na preparação da query: " . $conn->error;
             } else {
-                $stmt->bind_param("ssss", $email, $cpf, $nome, $senha);
+                $stmt->bind_param("ssss", $email, $cpf, $nome, $senha_hash);
                 if ($stmt->execute()) {
                     $stmt->close();
+                   
                     header("Location: ../Login/Login.php");
                     exit;
                 } else {
@@ -64,14 +71,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <title>Cadastro</title>
   <link rel="stylesheet" href="Cadastro.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css">
-  <script src="https://kit.fontawesome.com/yourkitid.js" crossorigin="anonymous"></script>
+  <link rel="shortcut icon" href="../../Img/Elementos/Logo SJ.png" sizes="64x64" type="image/x-icon">
 </head>
 <body>
 
 <header class="navbar">
   <div class="left-side">
     <div class="logo">
-      <img src="../Img/Elementos/Logo SJ.png" alt="Logo">
+      <img src="../../Img/Elementos/Logo SJ.png" alt="Logo">
       <span>SKULL<br>JABB</span>
     </div>
 
@@ -86,34 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <a href="../Loja/Loja.php">Loja</a>
     <a href="../Suporte/Suporte.php">Suporte</a>
   </div>
-
-  <div class="icons">
-    <a href="../Carrinho/Carrinho.php"><i class="mdi mdi-cart icone"></i></a>
-
-    <div class="profile">
-      <?php if ($usuario): ?>
-          <a href="../Perfil/Perfil.php">
-            <img src="../Img/Perfis/Perfil.png" alt="Perfil">
-          </a>
-      <?php else: ?>
-          <a href="../Login/Login.php">
-            <img src="../Img/Perfis/Perfil.png" alt="Entrar">
-          </a>
-      <?php endif; ?>
-    </div>
-  </div>
 </header>
-
-<script src="Cadastro.js"></script>
-
-<div vw class="enabled">
-  <div vw-access-button class="active"></div>
-  <div vw-plugin-wrapper>
-    <div class="vw-plugin-top-wrapper"></div>
-  </div>
-</div>
-<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-<script> new window.VLibras.Widget('https://vlibras.gov.br/app'); </script>
 
 <div class="page">
     <form method="POST" class="form-login" novalidate>
@@ -123,12 +103,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php endif; ?>
         <p class="nomes">E-mail</p>
         <input type="email" name="email" placeholder="Username@email.com" required value="<?= isset($email) ? htmlspecialchars($email, ENT_QUOTES, 'UTF-8') : '' ?>">
+        
         <p class="nomes">CPF</p>
-        <input type="text" name="cpf" placeholder="000.000.000-00" required value="<?= isset($cpf) ? htmlspecialchars($cpf, ENT_QUOTES, 'UTF-8') : '' ?>">
+        <input type="text" name="cpf" id="cpf" placeholder="000.000.000-00" maxlength="14" required value="<?= isset($cpf) ? htmlspecialchars($cpf, ENT_QUOTES, 'UTF-8') : '' ?>">
+
         <p class="nomes">Nickname</p>
         <input type="text" name="nome" placeholder="MeuNickname" required value="<?= isset($nome) ? htmlspecialchars($nome, ENT_QUOTES, 'UTF-8') : '' ?>">
+        
         <p class="nomes">Senha</p>
         <input type="password" name="senha" placeholder="Minha senha" required>
+        
         <button type="submit" class="btn-cadastrar">Cadastrar</button>
         <br>
         <p class="possui">Já possui conta? <a href="../Login/Login.php">Conecte-se</a></p>
@@ -147,5 +131,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </footer>
 
 <script src="../Login/Login.js"></script>
+<script src="cadastro.js"></script>
+
+
 </body>
 </html>

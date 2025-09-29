@@ -1,8 +1,7 @@
 <?php
 session_start();
-$_SESSION['ID_cliente'] = 1; // teste sem login
 
-$ID_cliente = $_SESSION['ID_cliente'] ?? null;
+$ID_cliente = $_SESSION['usuario_id'] ?? null;
 if(!$ID_cliente){ 
     echo "Usuário não logado!"; 
     exit; 
@@ -58,13 +57,16 @@ if(isset($_GET['carrinho'])){
 
 // Agora o método ordenar já deve trazer também os gêneros concatenados
 $jogos = $lista->ordenar($order_by);
+
+if (!isset($_SESSION['usuario_id'])) {
+    header("Location: ../Login/Login.php");
+    exit;
+}
+
+require_once "../Perfil/ClasseModelagemPerfil.php";
+$perfil = Perfil::buscarPorId($_SESSION['usuario_id']);
+
 ?>
-
-
-<?php
-$jogos = $lista->ordenar($order_by);
-?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -90,33 +92,34 @@ $jogos = $lista->ordenar($order_by);
 
   <div class="content">
 
-   <header class="navbar">
-  <div class="left-side">
-    <div class="logo">
-      <a href="#"><img src="../../Img/Elementos/Logo SJ.png" alt="Caveira branca com capuz azul"></a>
-      <a class="lin" href=""><span>SKULL<br>JABB</span></a>
-    </div>
+    <header class="navbar">
+            <div class="left-side">
+                <div class="logo">
+                    <a href="../Home/home.php"><img src="../../Img/Elementos/Logo SJ.png" alt="Caveira branca com capuz azul"></a>
+                    <a class="lin" href=""><span>SKULL<br>JABB</span></a>
+                </div>
 
-    <div class="search">
-      <input type="text" placeholder="Procurar...">
-      <a href="#"><i class="mdi mdi-magnify search-icon"></i></a>
-    </div>
-  </div>
+                <div class="search">
+                    <input type="text" placeholder="Procurar...">
+                    <a href="#"><i class="mdi mdi-magnify search-icon"></i></a>
+                </div>
+            </div>
 
+            <nav class="nav-links">
+                <a class="grif" href="../Home/Home.php">Home</a> 
+                <a href="../Loja/loja.php">Loja</a>
+                <a href="../Suporte/Suporte.php">Suporte</a> 
+            </nav>
 
-    <nav class="nav-links">
-      <a class="grif" href="#">Home</a>
-      <a href="#">Loja</a>
-      <a href="#">Suporte</a>
-    </nav>
-
-    <div class="icons">
-      <a href="#"><i class="mdi mdi-cart icone"></i></a>
-      <div class="profile">
-        <a href="#"><img src="../../Img/Perfis/Artist_.jpeg" alt="Perfil"></a>
-      </div>
-    </div>
-  </header>
+            <div class="icons">
+                <a href="../Carrinho/Carrinho.php"><i class="mdi mdi-cart icone"></i></a> <!-- CORRIGI O LINK -->
+                <div class="profile">
+                    <a href="../Perfil/Perfil.php">
+                        <img src="<?= $perfil->foto ? $perfil->foto : '../../Img/Elementos/user.png' ?>" alt="Perfil">
+                    </a>
+                </div>
+            </div>
+        </header>
 
   </div>
 
