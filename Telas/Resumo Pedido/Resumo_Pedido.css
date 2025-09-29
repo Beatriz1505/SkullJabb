@@ -1,0 +1,769 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background-color: #3A415A;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.content {
+  flex: 1;
+}
+
+.navbar {
+  background-color: #242432;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+  position: relative;
+}
+
+.left-side {
+  display: flex;
+  align-items: center;
+  gap: 20px; 
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 5px; 
+}
+
+.logo img {
+  height: 90px;
+  width: 90px;
+}
+
+.logo span {
+  font-weight: bold;
+  color: white;
+  font-size: 24px;
+  font-family: "Orbitron", sans-serif;
+  margin-left: -15px;
+  text-align: center;
+  display: flex;
+  
+}
+
+.search {
+  position: relative;
+  background-color: #E1E0EE;
+  border-radius: 5px;
+  width: 190px;
+}
+
+.search input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: "Orbitron", sans-serif;
+  font-weight: bold;
+  color: #6C7489;
+  padding: 5px 30px 5px 10px; 
+  font-size: 15px;
+  gap: 15px;
+  box-sizing: border-box;
+}
+
+.search i {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #555;
+  font-size: 22px;
+}
+
+.nav-links {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 30px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-size: 32px;
+  font-family: "Orbitron", sans-serif;
+  border-bottom: 2px solid transparent; 
+  color: white; 
+  transition: color 0.3s, border-bottom 0.3s; 
+}
+
+.nav-links a:hover {
+  border-bottom: 2px solid #3b7ef5;
+  color: #3b7ef5;
+  transition: color 0.3s;
+}
+
+.grif {
+    color: #3b7ef5;
+}
+
+.icons {
+  display: flex;
+  justify-content: flex-start; 
+  align-items: center;
+  gap: 20px;
+}
+
+.icons i {
+  font-size: 55px;
+  color: #e0e0f5;
+  cursor: pointer;
+}
+
+.icons i:hover {
+  color: #b7b7ff;
+  transition: color 0.3s;
+}
+
+.profile img {
+  border-radius: 100px;
+  height: 58px;
+  width: 59px;
+  padding: 4px;
+  margin-right: 15px;
+}
+
+/* ----------- Info - 01  ----------- */
+
+.container-jogos {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;   
+    gap: 20px;
+    align-items: stretch;
+    width: 100%;            
+    max-width: 1200px;      
+    margin: 0 auto;         
+}
+.info-01 h2 {
+  font-size: 3rem;
+  font-weight: lighter;
+  margin-bottom: 1rem;  
+  font-family: 'Orbitron', sans-serif;
+  text-align: center;
+  color: #fff;
+  letter-spacing: 1px;
+}
+
+
+.container-pedido {
+    width: 100%;
+    margin: 0; 
+    background-color: #2C2E40;
+    max-width: 1200px;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    color: #fff;
+    position: relative; 
+}
+
+
+
+/* Container dos jogos */
+.itens-container {
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+/* Cada jogo */
+.item-jogo {
+    display: flex;
+    background-color:#2C2E40;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    padding: 10px;
+    align-items: center;
+    transition: transform 0.2s;
+     border: 1px solid #fff;
+}
+
+.item-jogo:hover {
+     transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+.item-jogo img {
+    width: 100%;
+    max-width: 400px;
+    height: 210px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 20px;
+   
+}
+
+
+.item-info p {
+    margin: 3px 0;
+}
+
+.item-info .nome {
+    font-weight: bold;
+   font-size: 1.8rem;
+   margin-top: -90px;
+    font-family: "Orbitron", sans-serif;
+}
+
+.item-info .preco, .item-info .desconto {
+    font-weight: 500;
+    font-size: 1.2rem;
+     font-family: 'Poppins', sans-serif;
+}
+
+
+/* ----------- Info - 02  ----------- */
+.Infos {
+   display: flex;
+  justify-content: center; /* centraliza o conteúdo */
+  align-items: flex-start; /* evita esticar verticalmente */
+  gap: 20px;
+  flex-wrap: wrap;
+  margin: 0; /* zera espaço externo */
+  padding: 0; /* zera espaço interno */
+}
+.Linha{
+    width: 100%;
+    height: 1px; /* fina linha */
+    background-color: #ddd; 
+    margin: 10px 0;
+}
+
+.acoes-pedido {
+    display: flex;
+    gap: 15px;
+   justify-content: flex-end;
+    margin-bottom: 20px; /* espaço entre botões e subtotal */
+    flex-wrap: wrap; /* caso os botões sejam muitos */
+}
+
+
+.resumo-total {
+    max-width: 800px; /* aumente para o tamanho desejado */
+    width: 100%;       /* ocupa 100% até o máximo */
+    margin: auto;
+    padding: 25px 30px;
+    border-radius: 12px;
+    font-family: Arial, sans-serif;
+    color: #fff;
+    box-sizing: border-box; /* garante que padding não aumente o tamanho total */
+}
+.resumo-total p {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0;
+  font-size: 1.3rem;
+}
+.resumo-total .Linha {
+    width: 100%;
+    height: 1px; /* fina linha */
+    background-color: #ddd; 
+    margin: 10px 0;
+}
+.resumo-total .total-text {
+  font-weight: 600;
+  color: #fff;
+   font-size: 1.8rem;
+}
+.resumo-total p strong {
+  font-weight: 600;
+  color: #fff;
+}
+.resumo-total .botao-finalizar {
+    width: 100%;
+    height: 55px;
+    background-color: #2873C9;
+    color: #FFFF;
+    border: none;
+    font-size: 1.5rem;
+    border-radius: 10px;
+    cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+.resumo-total .botao-finalizar:hover {
+      background-color: #3c6594;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); 
+    transform: translateY(-2px); 
+}
+.resumo-total p:nth-child(2) {
+  color: #FFF; 
+}
+
+.resumo-total p:last-child {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #ffffff;
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
+  margin-top: 10px;
+}
+
+
+
+/* ----------- Info - 03  ----------- */
+
+
+.acoes-pedido .toggle-input {
+    background-color: #2873C9;
+    border: none;
+    border-radius: 50%;
+    width: 57px;
+    height: 57px;
+    font-size: 24px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.acoes-pedido button:hover {
+    background-color: #3c6594;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); 
+    transform: translateY(-2px); 
+}
+
+
+.input-popup {
+    display: none;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #3A415A;
+    color: #B1AFC9;
+    border-radius: 10px;
+    padding: 8px 14px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    z-index: 100;
+}
+
+.input-popup form {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+}
+
+.input-popup .box-text {
+    padding: 10px 16px;
+    border-radius: 12px;
+    border: none;
+    outline: none;
+    font-family: "Orbitron", sans-serif;
+    background-color:transparent;
+    color: #B1AFC9;
+    font-size: 1.3rem;
+    text-align: left;
+  
+}
+
+.input-popup .botao {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 70%;
+    background-color: transparent;
+    color: #fff;
+    cursor: pointer;
+}
+
+button[name="aplicarCupom"] .mdi,
+button[name="adicionarJogo"] .mdi {
+    font-size: 2rem; /* aumenta o tamanho do ícone */
+    color: #fff;
+}
+
+.input-popup button:hover {
+    background-color: #272e477a;
+}
+
+
+.input-popup.show {
+    display: block;
+    animation: fadeIn 0.25s ease forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translate(-50%, -60%); }
+    to { opacity: 1; transform: translate(-50%, -50%); }
+}
+
+.mensagem-cupom,
+.mensagem-erro,
+.mensagem-sucesso {
+    position: fixed;
+    top: 20px;       /* Ajuste a distância do topo */
+    left: 50%;       /* Centraliza horizontalmente */
+    transform: translateX(-50%);
+    background-color: #fff; 
+    color: #444;
+    padding: 6px 12px;   
+    min-height: 24px;     
+    border-radius: 8px;    
+    align-items: center;    
+    text-align: center;
+    font-size: 0.9rem;         
+    font-weight: bold;      
+    width: auto;               
+    opacity: 1;
+    z-index: 9999;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2); /* destaque sutil */
+    transition: opacity 0.5s ease-out;
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+/* cores diferentes */
+
+/* Fade out após aparecer */
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+.mensagem-cupom.show,
+.mensagem-erro.show,
+.mensagem-sucesso.show {
+    animation: fadeOut 2s forwards; /* desaparece após 2s */
+}
+
+
+
+/* ===== Formulários ===== */
+form {
+    margin: 20px 0;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+form input[type="text"] {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: none;
+    font-size: 14px;
+    width: 300px;
+}
+
+form button {
+    padding: 8px 15px;
+    background-color: #4a69ad; /* azul destaque */
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+form button:hover {
+    background-color: #6a82c3;
+    transform: scale(1.05);
+}
+
+/* Mensagens de aviso/sucesso */
+.mensagem {
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+    color: #2b1b66; /* amarelo claro para destaque */
+}
+
+/* Scrollbar personalizada */
+.itens-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.itens-container::-webkit-scrollbar-thumb {
+   
+    background-color: #3A415A;
+    border-radius: 10px;
+}
+
+.itens-container::-webkit-scrollbar-track {
+    background-color: #76809B;
+    margin: 2px;
+    border-radius: 10px;
+}
+
+
+
+/* Modal base */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px);
+  background-color: rgba(0,0,0,0.4);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-conteudo {
+  background-color: #2C2E40;
+  padding: 30px 40px;
+  border-radius: 12px;
+  max-width: 1000px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+
+.fechar {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.opcoes-pagamento {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0;
+}
+
+.pagamento-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  background-color: #3A415A;
+  width: 40%;
+  border: #76809B solid 3px;
+  margin: 15px;
+  border-radius: 10px;
+  transition: transform 0.2s;
+}
+
+.img-pagamento {
+  width: 200px; /* ajuste o tamanho se precisar */
+  
+}
+
+.pagamento-btn:hover {
+  transform: scale(1.08); /* efeito hover leve */
+}
+
+.detalhes-pagamento img {
+  max-width: 200px;
+  margin-top: 15px;
+}
+
+.detalhes-pagamento a {
+  display: inline-block;
+  margin-top: 10px;
+  text-decoration: none;
+  color: #fff;
+  background-color: #0070ba;
+  padding: 10px 20px;
+  border-radius: 8px;
+}
+.form-pagamento {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form-pagamento label {
+  font-weight: 500;
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+  text-align: left;
+}
+
+.form-pagamento input {
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+
+.campo-nome {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  text-align: left;
+}
+
+.campo-nome input {
+  width: 90%   !important   ;
+  max-width: 90%;     
+  box-sizing: border-box;
+}
+
+/* Linha com os outros campos */
+.linha-campos {
+  text-align: left;
+  display: flex;
+  gap: 12px;
+}
+
+
+.linha-campos .numero-cartao {
+  flex: 2; 
+}
+
+.linha-campos .ccv {
+  flex: 1;
+}
+
+.linha-campos .validade {
+  flex: 1.5; 
+}
+
+.form-pagamento button {
+  margin: auto;
+  text-align: center;
+  justify-content: center;
+  width: 343px;
+  padding: 10px;
+  background-color:#2873C9;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+ 
+}
+
+.form-pagamento button:hover {
+  opacity: 0.9;
+}
+.pix-container {
+  text-align: center;       /* mantém tudo à esquerda */
+}
+
+#pixQRCode {
+  display: inline-block;  /* não centraliza */
+  margin-top: 10px;       /* espaçamento em cima do QR */
+}
+.botao-pagamento {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #2873C9;
+  color: #fff;
+  border-radius: 8px;
+  text-decoration: none; /* remove sublinhado do link */
+  font-weight: bold;
+  text-align: center;
+  transition: 0.2s;
+}
+
+.botao-pagamento:hover {
+  opacity: 0.9;
+}
+#modalConfirmacao {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.6); /* fundo escurecido */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+#btnFecharConfirmacao {
+  padding: 10px 20px;
+  font-size: 1.2rem;      /* aumenta o tamanho da letra */
+  font-weight: bold;       /* deixa o texto mais chamativo */
+  color: #fff;             /* cor da letra */
+  background-color: #2873C9; /* cor do botão */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+  margin-top: 15px;       /* distância do texto da modal */
+}
+
+#btnFecharConfirmacao:hover {
+  background-color: #5192dd; /* efeito hover */
+}
+#modalConfirmacao .modal-conteudo {
+  background-color: #3A415A;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  height: 50%;
+  width: 700px;
+}
+#modalConfirmacao .modal-conteudo p,
+#modalConfirmacao .modal-conteudo span,
+#modalConfirmacao .modal-conteudo h2 {
+    font-size: 2rem; 
+    color: #fff;       
+    font-weight: 500; 
+}
+
+#modalConfirmacao .fechar {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/* ----------- Footer ----------- */
+footer {
+  background-color: #232331; 
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  font-size: 0.9rem;
+  border-top: 1px solid #444; 
+}
+
+footer .social-icons {
+  margin-bottom: 5px;
+}
+
+footer .social-icons a {
+  color: white;
+  font-size: 40px;
+  margin: 0 10px;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+footer .social-icons a:hover {
+  color: #3b7ef5; 
+}
+
+.lin {
+  text-decoration: none;
+  color: white;
+}
+
+a {
+    color: white;
+}
