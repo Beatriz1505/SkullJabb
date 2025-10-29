@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 29/09/2025 às 05:10
+-- Tempo de geração: 29/10/2025 às 05:39
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -19,8 +19,37 @@ SET time_zone = "+00:00";
 
 --
 -- Banco de dados: `skulljabb`
+--
 CREATE DATABASE IF NOT EXISTS `skulljabb` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `skulljabb`;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `amizade`
+--
+
+CREATE TABLE `amizade` (
+  `id_amizade` int(11) NOT NULL,
+  `id_solicitante` int(11) NOT NULL,
+  `id_recebedor` int(11) NOT NULL,
+  `status` enum('pendente','aceito','recusado') DEFAULT 'pendente',
+  `data_solicitacao` timestamp NOT NULL DEFAULT current_timestamp(),
+  `data_resposta` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `amizade`
+--
+
+INSERT INTO `amizade` (`id_amizade`, `id_solicitante`, `id_recebedor`, `status`, `data_solicitacao`, `data_resposta`) VALUES
+(6, 1, 3, 'aceito', '2025-10-28 19:30:12', '2025-10-28 23:19:47'),
+(10, 5, 3, 'recusado', '2025-10-29 02:26:36', '2025-10-29 01:04:08'),
+(11, 5, 1, 'pendente', '2025-10-29 02:26:40', NULL),
+(13, 7, 3, 'aceito', '2025-10-29 02:54:16', '2025-10-29 00:19:39'),
+(14, 8, 3, 'aceito', '2025-10-29 02:56:04', '2025-10-29 00:19:44'),
+(15, 9, 3, 'aceito', '2025-10-29 03:10:50', '2025-10-29 01:04:11'),
+(16, 11, 3, 'recusado', '2025-10-29 03:17:36', '2025-10-29 01:09:56');
 
 -- --------------------------------------------------------
 
@@ -42,7 +71,36 @@ CREATE TABLE `avaliacao` (
 --
 
 INSERT INTO `avaliacao` (`ID_avaliacao`, `ID_cliente`, `ID_jogo`, `nota`, `comentario`, `data_avaliacao`) VALUES
-(10, 4, 19, 4, 'Interessante', '2025-09-28 23:01:49');
+(10, 4, 19, 4, 'Interessante', '2025-09-28 23:01:49'),
+(11, 3, 11, 4, 'Esse jogo é muito bem desenvolvido!', '2025-10-29 01:03:42'),
+(12, 3, 17, 3, 'Jogo muito interessante', '2025-10-29 01:07:03'),
+(13, 3, 44, 5, 'Jogo Lindo!', '2025-10-29 01:08:11'),
+(14, 3, 3, 5, 'Jogo incrível!', '2025-10-29 01:09:14'),
+(15, 3, 3, 3, 'Adoro esse jogo', '2025-10-29 01:20:56');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `biblioteca`
+--
+
+CREATE TABLE `biblioteca` (
+  `id_biblioteca` int(11) NOT NULL,
+  `id_cliente` int(11) NOT NULL,
+  `id_jogo` int(11) NOT NULL,
+  `data_compra` datetime DEFAULT current_timestamp()
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `biblioteca`
+--
+
+INSERT INTO `biblioteca` (`id_biblioteca`, `id_cliente`, `id_jogo`, `data_compra`) VALUES
+(1, 3, 18, '2025-10-29 00:24:03'),
+(2, 3, 3, '2025-10-29 00:44:55'),
+(3, 1, 15, '2025-10-29 00:57:36'),
+(4, 1, 18, '2025-10-29 00:57:44'),
+(5, 1, 23, '2025-10-29 00:57:50');
 
 -- --------------------------------------------------------
 
@@ -62,9 +120,10 @@ CREATE TABLE `carrinho` (
 --
 
 INSERT INTO `carrinho` (`ID_carrinho`, `ID_cliente`, `ID_jogo`, `quantidade`) VALUES
-(20, 3, 10, 1),
+(29, 3, 34, 1),
 (19, 2, 44, 1),
-(22, 3, 11, 1);
+(24, 6, 4, 1),
+(25, 6, 12, 1);
 
 -- --------------------------------------------------------
 
@@ -89,10 +148,16 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`ID_cliente`, `email`, `CPF`, `nome`, `senha`, `pontos`, `usuario`, `foto`, `moldura`) VALUES
-(1, 'galdinob596@gmail.com', '501.988.228-85', 'Bea', '$2y$10$FfLDzgzMPTt10nkYi6VWOeXevDDlwdeVJ6IaoeiFpSZ70FpA1b63O', 50, 'Bellatrizx', '../../Img/Perfis/User 03.jpeg', '../../Img/Loja de Pontos/moldura_cogumelo.png'),
-(2, 'jeeh_iero@yahoo.com.br', '123.456.789-12', 'dies', '$2y$10$m6NKIXxw/4nmaI/zEkYkfuZzXK4n/L6OJtWIbRriPPxvxuEZjf.9q', 50, 'dies', '../../Img/Perfis/none.png', ''),
-(3, 'EstherGaldino@gmail.com', '212.252.365-78', 'Esther', '$2y$10$s4yp9GD50NlcBIi24y26IOFfclbqMyuPTG9oEyiRS3oEnD.SfIrb6', 50, 'steh', '../../Img/Perfis/Artist_.jpeg', '../../Img/Loja de Pontos/moldura_cogumelo.png'),
-(4, 'Teste@gmail.com', '000.000.000-00', 'Beatriz', '$2y$10$cqp3sK5E5GrWUdVo3wgaH.wV2NNdWDgreVkjKzmrA9QVX43quElDe', 50, 'bea', '../../Img/Perfis/User 03.jpeg', '../../Img/Loja de Pontos/moldura_coracao.png');
+(1, 'galdinob596@gmail.com', '501.988.228-85', 'Bea', '$2y$10$FfLDzgzMPTt10nkYi6VWOeXevDDlwdeVJ6IaoeiFpSZ70FpA1b63O', 50, 'Bellatrizx', '../../Img/Perfis/castiel supernatural icon.jpeg', '../../Img/Loja de Pontos/moldura_coracao.png'),
+(3, 'EstherGaldino@gmail.com', '212.252.365-78', 'Esther', '$2y$10$s4yp9GD50NlcBIi24y26IOFfclbqMyuPTG9oEyiRS3oEnD.SfIrb6', 50, 'Borderlinda', '../../Img/Perfis/download (4).jpeg', '../../Img/Loja de Pontos/moldura_cogumelo.png'),
+(5, 'bellatrizxgaldinotorres@gmail.com', '501.288.955-86', 'biabia', '$2y$10$iI6OsNkHUR3FAw887IIb5uCPhnf6w9LWnUa9URr2PPB8Cu8G67Rje', 50, 'bellatrizx', '../../Img/Perfis/Snoopy Reading A Book _) Sticker.jpeg', ''),
+(6, 'Jeeh_iero@gmail.com', '222.222.222-22', 'deta', '$2y$10$lgYbylQmo4s/YHKFRgne/ulSPUnjjtCm0BhWx3WjFTblGG/t6skcO', 50, 'Heyhugme', '../../Img/Perfis/Arthur.jpeg', ''),
+(7, 'GabrielleSouza@gmail.com', '111.111.111-11', 'Aby', '$2y$10$M0NAMrSYgpUtu7cyg57IHOlsb7T9sUT0wrgdxYPzhW1g53xV9IW1y', 50, 'Bagi', '../../Img/Perfis/Sam.jpeg', '../../Img/Loja de Pontos/moldura_cogumelo.png'),
+(8, 'YasmimBorges@gmail.com', '222.222.222-20', 'Mamim', '$2y$10$JO95a1cDnM/HOQa4PYroOeKUz2mbym/L4RZgInb4qM7Qz1Gnf9pLO', 50, 'Yasbomel', '../../Img/Perfis/Dean Winchester icon.jpeg', '../../Img/Loja de Pontos/moldura_caveira.png'),
+(9, 'NicollasLopes@gmail.com', '777.777.777-77', 'Nicollas', '$2y$10$pfs1dGLx8Mtpd9WZhd9q3eI27DYiyt1FGmU5qYp3RZMgFBeJx85JG', 50, 'nicollaszxn', '../../Img/Perfis/WhatsApp Image 2025-10-29 at 12.09.19 AM.jpeg', '../../Img/Loja de Pontos/moldura_coracao.png'),
+(10, 'AnaLivia@gmail.com', '444.444.444-44', 'Nali', '$2y$10$RQqiglvuKToNwIVPhm1Jd.wfn0MRov2ezpCxF.YV00OQ5aEfqgJMa', 50, 'Analivia', '../../Img/Perfis/Andressa Urach usa microshort ao posar com top da Seleção.jpeg', ''),
+(11, 'JayaneElias@gmail.com', '444.444.444-40', 'Jay', '$2y$10$hjwYyi7Rmoho3l7A6uuAJu2dqE8lGfw8GsqForUCwgXjkV4qCGbjS', 50, 'Jayane', '../../Img/Perfis/890fa97d-4547-4370-84dd-02f359d210d6.jpeg', ''),
+(12, 'BeatrizBatista@gmail.com', '555.555.555-50', 'Bia', '$2y$10$skeH08/BGcaf32WCBHBqUOxitlzZBkLydYiDsiFpw3.pbJCY/fJl2', 50, 'Biaxx', '../../Img/Perfis/༻𓊈𒆜hello kitty 𒆜𓊉༺.jpeg', '');
 
 -- --------------------------------------------------------
 
@@ -116,6 +181,20 @@ CREATE TABLE `cliente_item` (
   `ID_cliente` int(11) NOT NULL,
   `ID_item` int(11) NOT NULL,
   `data_compra` datetime DEFAULT current_timestamp()
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `cliente_jogo`
+--
+
+CREATE TABLE `cliente_jogo` (
+  `id_cliente_jogo` int(11) NOT NULL,
+  `id_cliente` int(11) NOT NULL,
+  `id_jogo` int(11) NOT NULL,
+  `horas_jogadas` decimal(6,1) DEFAULT 0.0,
+  `data_ultimo_jogo` datetime DEFAULT current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -370,9 +449,29 @@ INSERT INTO `lista_desejo` (`ID_cliente`, `ID_jogo`) VALUES
 (2, 16),
 (2, 21),
 (2, 43),
-(3, 11),
-(3, 18),
-(4, 19);
+(3, 44),
+(3, 46),
+(4, 19),
+(6, 1),
+(6, 11),
+(6, 18),
+(6, 34);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `notificacao`
+--
+
+CREATE TABLE `notificacao` (
+  `id_notificacao` int(11) NOT NULL,
+  `id_destinatario` int(11) NOT NULL,
+  `id_remetente` int(11) DEFAULT NULL,
+  `tipo` enum('amizade','sistema','mensagem','outro') DEFAULT 'amizade',
+  `mensagem` text DEFAULT NULL,
+  `lido` tinyint(1) DEFAULT 0,
+  `data_envio` datetime DEFAULT current_timestamp()
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -417,15 +516,44 @@ CREATE TABLE `resumo_pedido` (
 INSERT INTO `resumo_pedido` (`ID_pedido`, `ID_cliente`, `data_pedido`, `status`, `metodo_pagamento`, `total`, `ID_cupom`) VALUES
 (1, 2, '2025-09-28 16:55:06', 'pendente', 'pix', 45.00, NULL);
 
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `suporte`
+--
+
+CREATE TABLE `suporte` (
+  `id` int(11) NOT NULL,
+  `id_cliente` int(11) NOT NULL,
+  `mensagem` text NOT NULL,
+  `data_envio` datetime DEFAULT current_timestamp()
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 --
 -- Índices para tabelas despejadas
 --
+
+--
+-- Índices de tabela `amizade`
+--
+ALTER TABLE `amizade`
+  ADD PRIMARY KEY (`id_amizade`),
+  ADD KEY `id_solicitante` (`id_solicitante`),
+  ADD KEY `id_recebedor` (`id_recebedor`);
 
 --
 -- Índices de tabela `avaliacao`
 --
 ALTER TABLE `avaliacao`
   ADD PRIMARY KEY (`ID_avaliacao`);
+
+--
+-- Índices de tabela `biblioteca`
+--
+ALTER TABLE `biblioteca`
+  ADD PRIMARY KEY (`id_biblioteca`),
+  ADD KEY `idx_bib_cliente` (`id_cliente`),
+  ADD KEY `idx_bib_jogo` (`id_jogo`);
 
 --
 -- Índices de tabela `carrinho`
@@ -453,6 +581,14 @@ ALTER TABLE `cliente_conquista`
 --
 ALTER TABLE `cliente_item`
   ADD PRIMARY KEY (`ID_cliente`,`ID_item`);
+
+--
+-- Índices de tabela `cliente_jogo`
+--
+ALTER TABLE `cliente_jogo`
+  ADD PRIMARY KEY (`id_cliente_jogo`),
+  ADD KEY `idx_cliente` (`id_cliente`),
+  ADD KEY `idx_jogo` (`id_jogo`);
 
 --
 -- Índices de tabela `conquista`
@@ -497,6 +633,14 @@ ALTER TABLE `lista_desejo`
   ADD PRIMARY KEY (`ID_cliente`,`ID_jogo`);
 
 --
+-- Índices de tabela `notificacao`
+--
+ALTER TABLE `notificacao`
+  ADD PRIMARY KEY (`id_notificacao`),
+  ADD KEY `idx_destinatario` (`id_destinatario`),
+  ADD KEY `idx_remetente` (`id_remetente`);
+
+--
 -- Índices de tabela `pedido_item`
 --
 ALTER TABLE `pedido_item`
@@ -509,26 +653,50 @@ ALTER TABLE `resumo_pedido`
   ADD PRIMARY KEY (`ID_pedido`);
 
 --
+-- Índices de tabela `suporte`
+--
+ALTER TABLE `suporte`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT para tabelas despejadas
 --
+
+--
+-- AUTO_INCREMENT de tabela `amizade`
+--
+ALTER TABLE `amizade`
+  MODIFY `id_amizade` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de tabela `avaliacao`
 --
 ALTER TABLE `avaliacao`
-  MODIFY `ID_avaliacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ID_avaliacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT de tabela `biblioteca`
+--
+ALTER TABLE `biblioteca`
+  MODIFY `id_biblioteca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `carrinho`
 --
 ALTER TABLE `carrinho`
-  MODIFY `ID_carrinho` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `ID_carrinho` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de tabela `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `ID_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT de tabela `cliente_jogo`
+--
+ALTER TABLE `cliente_jogo`
+  MODIFY `id_cliente_jogo` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `conquista`
@@ -567,6 +735,12 @@ ALTER TABLE `jogo`
   MODIFY `ID_jogo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
+-- AUTO_INCREMENT de tabela `notificacao`
+--
+ALTER TABLE `notificacao`
+  MODIFY `id_notificacao` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de tabela `pedido_item`
 --
 ALTER TABLE `pedido_item`
@@ -577,6 +751,23 @@ ALTER TABLE `pedido_item`
 --
 ALTER TABLE `resumo_pedido`
   MODIFY `ID_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de tabela `suporte`
+--
+ALTER TABLE `suporte`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- Restrições para tabelas despejadas
+--
+
+--
+-- Restrições para tabelas `amizade`
+--
+ALTER TABLE `amizade`
+  ADD CONSTRAINT `amizade_ibfk_1` FOREIGN KEY (`id_solicitante`) REFERENCES `cliente` (`ID_cliente`) ON DELETE CASCADE,
+  ADD CONSTRAINT `amizade_ibfk_2` FOREIGN KEY (`id_recebedor`) REFERENCES `cliente` (`ID_cliente`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

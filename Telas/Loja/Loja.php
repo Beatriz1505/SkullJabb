@@ -110,7 +110,7 @@ $staff = Jogo::listarAleatorio(8);
         </div>
     </div>
 
-    <a href=""><button>Informações</button></a>
+    <a href="../Informações/informações.html"><button>Informações</button></a>
 </section>
 
 

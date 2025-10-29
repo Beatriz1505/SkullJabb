@@ -161,7 +161,7 @@ body {
   justify-content: flex-start; 
   gap: 15px;
   width: 420px;
-  height: 190px;
+  height: 205px;
   padding-left: 15px; 
 }
 
@@ -383,7 +383,6 @@ body {
   background-color: #242432;
 }
 
-/* popup */
 .popup {
   display: none;
   position: fixed;
@@ -400,17 +399,66 @@ body {
   background: #242432;
   padding: 25px 30px;
   border-radius: 15px;
-  width: 400px;
+  width: 600px;
   max-width: 90%;
   text-align: center;
   box-shadow: 0px 4px 30px rgba(59,126,245,0.6);
   animation: aparecer 0.3s ease;
+  color: white;
 }
+
 
 @keyframes aparecer {
   from { opacity: 0; transform: scale(0.9); }
   to { opacity: 1; transform: scale(1); }
 }
+
+.btn-accept,
+.btn-decline {
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  margin: 2px;
+  padding: 4px 10px;  /* menor altura e largura */
+  font-size: 13px;    /* fonte menor */
+  font-weight: 600;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.2s ease;
+}
+
+/* Aceitar */
+.btn-accept {
+  background-color: #3dd83d;
+  box-shadow: 0 0 3px rgba(50, 255, 50, 0.3);
+}
+
+.btn-accept:hover {
+  background-color: #48ff48;
+  box-shadow: 0 0 6px rgba(100, 255, 100, 0.5);
+  transform: scale(1.03);
+}
+
+/* Recusar */
+.btn-decline {
+  background-color: #e03a3a;
+  box-shadow: 0 0 3px rgba(255, 80, 80, 0.3);
+}
+
+.btn-decline:hover {
+  background-color: #ff5555;
+  box-shadow: 0 0 6px rgba(255, 100, 100, 0.5);
+  transform: scale(1.03);
+}
+
+/* Alinhamento */
+.request-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 5px;
+}
+
 
 .avatar-box {
   position: relative;
@@ -537,6 +585,25 @@ body {
   gap: 15px;
 }
 
+    .acao-amizade-wrap { display:flex; gap:8px; align-items:center; justify-content:flex-end; }
+ 
+    .btn-add, .btn-remove {
+      background: #2B2B3A;
+      color: #fff;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-family: 'Poppins', sans-serif;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .btn-add:hover, .btn-remove:hover { background:#E1E0EE; color:#242432; transition:0.25s; }
+    .btn-disabled { background:#9aa0b3; color:#fff; border:none; padding:6px 12px; border-radius:4px; font-size:14px; }
+    .request-item .request-info { display:flex; flex-direction:column; gap:6px; align-items:flex-start; }
+    .request-actions button { margin-left:6px; }
+   
+    .requests-list { max-height: 320px; overflow:auto; }
+
 .salvar, .sair {
   flex: 1;
   padding: 10px 0;
@@ -546,6 +613,7 @@ body {
   cursor: pointer;
   font-weight: bold;
   transition: 0.3s;
+  width: 70px;
 }
 
 .salvar {
@@ -558,13 +626,36 @@ body {
 }
 
 .sair {
-  background: #e74c3c;
+  width: 70px;
+  font-size: 16px;
+  background: #e03a3a;
   color: white;
 }
 
 .sair:hover {
-  background: #ff6b6b;
+  background: #fa9393;
 }
+
+
+.btn-add {
+  background: #2B2B3A;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.3s;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.btn-add:hover {
+  background: #E1E0EE;
+  color: #242432;
+  transition: 0.4s;
+}
+
 
 footer {
   background-color: #232331; 

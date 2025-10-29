@@ -9,19 +9,16 @@ if (!isset($_SESSION['usuario_id'])) {
 
 $id = $_SESSION['usuario_id'];
 
-// Buscar o perfil atual
 $perfil = Perfil::buscarPorId($id);
 if (!$perfil) {
     echo "Perfil não encontrado!";
     exit;
 }
 
-// Atualizar dados do formulário
 $perfil->nome    = $_POST['nome'] ?? $perfil->nome;
 $perfil->usuario = $_POST['usuario'] ?? $perfil->usuario;
 $perfil->moldura = $_POST['moldura'] ?? $perfil->moldura;
 
-// Upload da foto (se enviado)
 if (!empty($_FILES['foto']['name'])) {
     $diretorio = "../../Img/Perfis/";
     $caminhoFoto = $diretorio . basename($_FILES["foto"]["name"]);
@@ -41,7 +38,6 @@ if ($perfil->salvar()) {
     echo "Erro ao atualizar perfil!";
 }
 
-// Salvar no banco
 if ($perfil->salvar()) {
     header("Location: Perfil.php");
     exit;
