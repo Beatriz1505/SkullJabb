@@ -154,9 +154,10 @@ body {
     margin: 0 auto;         
 }
 .info-01 h2 {
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: lighter;
-  margin-bottom: 1rem;  
+  margin-bottom: 2rem;  
+  margin-top: 2rem;
   font-family: 'Orbitron', sans-serif;
   text-align: center;
   color: #fff;
@@ -233,94 +234,43 @@ body {
 
 /* ----------- Info - 02  ----------- */
 .Infos {
-   display: flex;
-  justify-content: center; /* centraliza o conteúdo */
-  align-items: flex-start; /* evita esticar verticalmente */
-  gap: 20px;
-  flex-wrap: wrap;
-  margin: 0; /* zera espaço externo */
-  padding: 0; /* zera espaço interno */
+    display: flex;
+    flex-direction: column; 
+     align-items: stretch; 
+    gap: 20px;
+    margin: 0;
+    padding: 0;
 }
-.Linha{
+
+.Linha {
     width: 100%;
-    height: 1px; /* fina linha */
+    height: 2px; 
     background-color: #ddd; 
     margin: 10px 0;
+}
+
+
+.acoes-pedido-wrapper,
+.acoes-pedido,
+.acao-form {
+    overflow: visible !important;
+}
+.acoes-pedido-wrapper {
+    max-width: 800px; 
+    width: 100%;
+    margin: 0 auto 10px auto; 
 }
 
 .acoes-pedido {
     display: flex;
     gap: 15px;
-   justify-content: flex-end;
-    margin-bottom: 20px; /* espaço entre botões e subtotal */
-    flex-wrap: wrap; /* caso os botões sejam muitos */
+    justify-content: flex-end; 
+    flex-wrap: wrap;
+    position: relative;
 }
-
-
-.resumo-total {
-    max-width: 800px; /* aumente para o tamanho desejado */
-    width: 100%;       /* ocupa 100% até o máximo */
-    margin: auto;
-    padding: 25px 30px;
-    border-radius: 12px;
-    font-family: Arial, sans-serif;
-    color: #fff;
-    box-sizing: border-box; /* garante que padding não aumente o tamanho total */
+.acoes-pedido .toggle-input span {
+    pointer-events: none;
 }
-.resumo-total p {
-  display: flex;
-  justify-content: space-between;
-  margin: 8px 0;
-  font-size: 1.3rem;
-}
-.resumo-total .Linha {
-    width: 100%;
-    height: 1px; /* fina linha */
-    background-color: #ddd; 
-    margin: 10px 0;
-}
-.resumo-total .total-text {
-  font-weight: 600;
-  color: #fff;
-   font-size: 1.8rem;
-}
-.resumo-total p strong {
-  font-weight: 600;
-  color: #fff;
-}
-.resumo-total .botao-finalizar {
-    width: 100%;
-    height: 55px;
-    background-color: #2873C9;
-    color: #FFFF;
-    border: none;
-    font-size: 1.5rem;
-    border-radius: 10px;
-    cursor: pointer;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
-}
-.resumo-total .botao-finalizar:hover {
-      background-color: #3c6594;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); 
-    transform: translateY(-2px); 
-}
-.resumo-total p:nth-child(2) {
-  color: #FFF; 
-}
-
-.resumo-total p:last-child {
-  font-weight: bold;
-  font-size: 1.2rem;
-  color: #ffffff;
-  border-top: 1px solid #ddd;
-  padding-top: 10px;
-  margin-top: 10px;
-}
-
-
-
-/* ----------- Info - 03  ----------- */
-
 
 .acoes-pedido .toggle-input {
     background-color: #2873C9;
@@ -342,14 +292,38 @@ body {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); 
     transform: translateY(-2px); 
 }
+.toggle-input {
+    position: relative;
+}
+
+.toggle-input::after {
+    content: attr(title);
+    position: absolute;
+    bottom: -60%;  
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+}
+
+.toggle-input:hover::after {
+    opacity: 1;
+}
+
 
 
 .input-popup {
-    display: none;
+     display: none;
     position: absolute;
-    top: 60%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 65px; 
+    left: 50%;   
     background-color: #3A415A;
     color: #B1AFC9;
     border-radius: 10px;
@@ -371,11 +345,10 @@ body {
     border: none;
     outline: none;
     font-family: "Orbitron", sans-serif;
-    background-color:transparent;
+    background-color: transparent;
     color: #B1AFC9;
     font-size: 1.3rem;
     text-align: left;
-  
 }
 
 .input-popup .botao {
@@ -397,48 +370,46 @@ button[name="adicionarJogo"] .mdi {
     background-color: #272e477a;
 }
 
-
 .input-popup.show {
     display: block;
     animation: fadeIn 0.25s ease forwards;
 }
+
 
 @keyframes fadeIn {
     from { opacity: 0; transform: translate(-50%, -60%); }
     to { opacity: 1; transform: translate(-50%, -50%); }
 }
 
-.mensagem-cupom,
-.mensagem-erro,
-.mensagem-sucesso {
-    position: fixed;
-    top: 20px;       /* Ajuste a distância do topo */
-    left: 50%;       /* Centraliza horizontalmente */
-    transform: translateX(-50%);
-    background-color: #fff; 
-    color: #444;
-    padding: 6px 12px;   
-    min-height: 24px;     
-    border-radius: 8px;    
-    align-items: center;    
-    text-align: center;
-    font-size: 0.9rem;         
-    font-weight: bold;      
-    width: auto;               
-    opacity: 1;
-    z-index: 9999;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2); /* destaque sutil */
-    transition: opacity 0.5s ease-out;
-    animation: fadeIn 0.2s ease-in-out;
-}
-
-/* cores diferentes */
-
-/* Fade out após aparecer */
 @keyframes fadeOut {
     0% { opacity: 1; }
     90% { opacity: 1; }
     100% { opacity: 0; }
+}
+
+
+.mensagem-cupom,
+.mensagem-erro,
+.mensagem-sucesso {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    color: #444;
+    padding: 6px 12px;   
+    min-height: 24px;
+    border-radius: 8px;
+    align-items: center;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: bold;
+    width: auto;
+    opacity: 1;
+    z-index: 9999;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: opacity 0.5s ease-out;
+    animation: fadeIn 0.2s ease-in-out;
 }
 
 .mensagem-cupom.show,
@@ -448,8 +419,156 @@ button[name="adicionarJogo"] .mdi {
 }
 
 
+.resumo-total {
+    max-width: 800px;
+    width: 100%;
+    margin: auto;
+    padding: 25px 30px;
+    border-radius: 12px;
+    font-family: Arial, sans-serif;
+    color: #fff;
+    box-sizing: border-box;
+}
 
-/* ===== Formulários ===== */
+.resumo-total p {
+    display: flex;
+    justify-content: space-between;
+    margin: 8px 0;
+    font-size: 1.3rem;
+}
+
+.resumo-total .Linha {
+    width: 100%;
+    height: 1px;
+    background-color: #ddd;
+    margin: 10px 0;
+}
+
+.resumo-total .total-text {
+    font-weight: 600;
+    color: #fff;
+    font-size: 1.8rem;
+}
+
+.resumo-total p strong {
+    font-weight: 600;
+    color: #fff;
+}
+
+.resumo-total .botao-finalizar {
+    width: 100%;
+    height: 55px;
+    background-color: #2873C9;
+    color: #FFFF;
+    border: none;
+    font-size: 1.5rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.resumo-total .botao-finalizar:hover {
+    background-color: #3c6594;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); 
+    transform: translateY(-2px); 
+}
+
+.resumo-total p:nth-child(2) {
+    color: #FFF;
+}
+
+.resumo-total p:last-child {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #ffffff;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+    margin-top: 10px;
+}
+
+
+/* ----------- Info - 04 ----------- */
+
+.modal {
+  display: none; 
+  position: fixed;
+  top: 10%;
+  left: 16%;
+  width: 100%;       /* cobre toda a tela */
+  height: 100%;      /* cobre toda a tela */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+ 
+}
+.modal.ativo {
+  display: flex; /* mostra quando ativado */
+}
+.modal-conteudo {
+  background-color: #212231;
+  padding: 30px 40px;
+  border-radius: 12px;
+  max-width: 1000px;
+  width: 90%;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+
+#modalConfirmacao {
+  position: fixed;
+  top: 20%;
+  left: 25%;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+#btnFecharConfirmacao {
+  padding: 10px 20px;
+  font-size: 1.2rem;      
+  font-weight: bold;      
+  color: #fff;            
+  background-color: #2873C9; 
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+  margin-top: 15px;     
+}
+
+#btnFecharConfirmacao:hover {
+  background-color: #5192dd; 
+}
+#modalConfirmacao .modal-conteudo {
+  background-color: #212231;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  height: 50%;
+  width: 700px;
+}
+#modalConfirmacao .modal-conteudo p,
+#modalConfirmacao .modal-conteudo span,
+#modalConfirmacao .modal-conteudo h2 {
+    font-size: 2rem; 
+    color: #fff;       
+    font-weight: 500; 
+}
+
+#modalConfirmacao .fechar {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+
+
 form {
     margin: 20px 0;
     display: flex;
@@ -468,7 +587,7 @@ form input[type="text"] {
 
 form button {
     padding: 8px 15px;
-    background-color: #4a69ad; /* azul destaque */
+    background-color: #4a69ad; 
     color: #fff;
     border: none;
     border-radius: 8px;
@@ -482,15 +601,14 @@ form button:hover {
     transform: scale(1.05);
 }
 
-/* Mensagens de aviso/sucesso */
 .mensagem {
     text-align: center;
     margin-top: 10px;
     font-weight: bold;
-    color: #2b1b66; /* amarelo claro para destaque */
+    color: #2b1b66; 
 }
 
-/* Scrollbar personalizada */
+
 .itens-container::-webkit-scrollbar {
     width: 8px;
 }
@@ -507,33 +625,6 @@ form button:hover {
     border-radius: 10px;
 }
 
-
-
-/* Modal base */
-.modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  backdrop-filter: blur(5px);
-  background-color: rgba(0,0,0,0.4);
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.modal-conteudo {
-  background-color: #2C2E40;
-  padding: 30px 40px;
-  border-radius: 12px;
-  max-width: 1000px;
-  width: 90%;
-  text-align: center;
-  position: relative;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-}
 
 .fechar {
   position: absolute;
@@ -563,12 +654,12 @@ form button:hover {
 }
 
 .img-pagamento {
-  width: 200px; /* ajuste o tamanho se precisar */
+  width: 200px; 
   
 }
 
 .pagamento-btn:hover {
-  transform: scale(1.08); /* efeito hover leve */
+  transform: scale(1.08); 
 }
 
 .detalhes-pagamento img {
@@ -609,35 +700,46 @@ form button:hover {
 .campo-nome {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  text-align: left;
+  width: 100%;      
+  margin-bottom: 12px;
 }
 
 .campo-nome input {
-  width: 90%   !important   ;
-  max-width: 90%;     
-  box-sizing: border-box;
+  width: 100% !important; 
+  padding: 8px 10px;
+  box-sizing: border-box;  
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
 }
 
-/* Linha com os outros campos */
 .linha-campos {
-  text-align: left;
   display: flex;
   gap: 12px;
+  width: 100%;
 }
 
-
 .linha-campos .numero-cartao {
-  flex: 2; 
+  flex: 1; 
 }
 
 .linha-campos .ccv {
-  flex: 1;
+  flex: 1; 
 }
 
 .linha-campos .validade {
-  flex: 1.5; 
+  flex: 1;
 }
+
+.linha-campos input {
+  width: 100%;
+  padding: 8px 10px;
+  box-sizing: border-box;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
 
 .form-pagamento button {
   margin: auto;
@@ -658,13 +760,14 @@ form button:hover {
 .form-pagamento button:hover {
   opacity: 0.9;
 }
+
 .pix-container {
-  text-align: center;       /* mantém tudo à esquerda */
+  text-align: center;      
 }
 
 #pixQRCode {
-  display: inline-block;  /* não centraliza */
-  margin-top: 10px;       /* espaçamento em cima do QR */
+  display: inline-block;  
+  margin-top: 10px;       
 }
 .botao-pagamento {
   display: inline-block;
@@ -672,7 +775,7 @@ form button:hover {
   background-color: #2873C9;
   color: #fff;
   border-radius: 8px;
-  text-decoration: none; /* remove sublinhado do link */
+  text-decoration: none;
   font-weight: bold;
   text-align: center;
   transition: 0.2s;
@@ -680,57 +783,6 @@ form button:hover {
 
 .botao-pagamento:hover {
   opacity: 0.9;
-}
-#modalConfirmacao {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.6); /* fundo escurecido */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-}
-#btnFecharConfirmacao {
-  padding: 10px 20px;
-  font-size: 1.2rem;      /* aumenta o tamanho da letra */
-  font-weight: bold;       /* deixa o texto mais chamativo */
-  color: #fff;             /* cor da letra */
-  background-color: #2873C9; /* cor do botão */
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.2s;
-  margin-top: 15px;       /* distância do texto da modal */
-}
-
-#btnFecharConfirmacao:hover {
-  background-color: #5192dd; /* efeito hover */
-}
-#modalConfirmacao .modal-conteudo {
-  background-color: #3A415A;
-  padding: 20px;
-  border-radius: 10px;
-  text-align: center;
-  height: 50%;
-  width: 700px;
-}
-#modalConfirmacao .modal-conteudo p,
-#modalConfirmacao .modal-conteudo span,
-#modalConfirmacao .modal-conteudo h2 {
-    font-size: 2rem; 
-    color: #fff;       
-    font-weight: 500; 
-}
-
-#modalConfirmacao .fechar {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  cursor: pointer;
-  font-size: 20px;
 }
 
 /* ----------- Footer ----------- */
