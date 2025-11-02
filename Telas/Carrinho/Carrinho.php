@@ -35,6 +35,13 @@ if ($res_check && $res_check->num_rows > 0) {
     $has_jogo_genero = true;
 }
 
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['finalizar'])) {
+    $_SESSION['resumo_carrinho'] = $cart_items; // salva itens do carrinho
+    header("Location: ../Resumo Pedido/Resumo_Do_Pedido.php");
+    exit;
+}
+
 // QUERY DO CARRINHO
 if ($has_jogo_genero) {
     $sql = "SELECT c.ID_carrinho AS cart_id,
@@ -172,9 +179,9 @@ $perfil = Perfil::buscarPorId($_SESSION['usuario_id']);
     <div class="cart-summary">
       <p>Total: R$ <span id="cart-total"><?php echo number_format($total,2,',','.'); ?></span></p>
       <div class="cart-buttons">
-          <form method="post">
-              <a href="../Resumo Pedido/Resumo_Do_Pedido.php"><button type="submit" name="finalizar" class="blue-btn">Prosseguir</button></a>
-          </form>
+         <form method="post">
+            <button type="submit" name="finalizar" class="blue-btn">Prosseguir</button>
+         </form>
           <a href="../Loja/loja.php"><button type="submit" name="finalizar" class="blue-btn">Continuar Comprando</button></a>
       </div>
     </div>
