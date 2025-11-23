@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 29/10/2025 às 05:39
+-- Tempo de geração: 23/11/2025 às 18:10
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -48,8 +48,11 @@ INSERT INTO `amizade` (`id_amizade`, `id_solicitante`, `id_recebedor`, `status`,
 (11, 5, 1, 'pendente', '2025-10-29 02:26:40', NULL),
 (13, 7, 3, 'aceito', '2025-10-29 02:54:16', '2025-10-29 00:19:39'),
 (14, 8, 3, 'aceito', '2025-10-29 02:56:04', '2025-10-29 00:19:44'),
-(15, 9, 3, 'aceito', '2025-10-29 03:10:50', '2025-10-29 01:04:11'),
-(16, 11, 3, 'recusado', '2025-10-29 03:17:36', '2025-10-29 01:09:56');
+(16, 11, 3, 'recusado', '2025-10-29 03:17:36', '2025-10-29 01:09:56'),
+(18, 11, 3, 'aceito', '2025-11-02 01:28:33', '2025-11-01 22:35:43'),
+(20, 9, 3, 'aceito', '2025-11-02 01:36:20', '2025-11-01 22:42:01'),
+(22, 1, 7, 'pendente', '2025-11-02 01:49:34', NULL),
+(23, 1, 8, 'pendente', '2025-11-02 01:49:38', NULL);
 
 -- --------------------------------------------------------
 
@@ -120,7 +123,6 @@ CREATE TABLE `carrinho` (
 --
 
 INSERT INTO `carrinho` (`ID_carrinho`, `ID_cliente`, `ID_jogo`, `quantidade`) VALUES
-(29, 3, 34, 1),
 (19, 2, 44, 1),
 (24, 6, 4, 1),
 (25, 6, 12, 1);
@@ -140,24 +142,25 @@ CREATE TABLE `cliente` (
   `pontos` int(11) NOT NULL DEFAULT 50,
   `usuario` varchar(70) NOT NULL,
   `foto` varchar(255) NOT NULL DEFAULT '../../Img/Perfis/none.png',
-  `moldura` varchar(255) NOT NULL
+  `moldura` varchar(255) NOT NULL,
+  `ultimo_resgate` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `cliente`
 --
 
-INSERT INTO `cliente` (`ID_cliente`, `email`, `CPF`, `nome`, `senha`, `pontos`, `usuario`, `foto`, `moldura`) VALUES
-(1, 'galdinob596@gmail.com', '501.988.228-85', 'Bea', '$2y$10$FfLDzgzMPTt10nkYi6VWOeXevDDlwdeVJ6IaoeiFpSZ70FpA1b63O', 50, 'Bellatrizx', '../../Img/Perfis/castiel supernatural icon.jpeg', '../../Img/Loja de Pontos/moldura_coracao.png'),
-(3, 'EstherGaldino@gmail.com', '212.252.365-78', 'Esther', '$2y$10$s4yp9GD50NlcBIi24y26IOFfclbqMyuPTG9oEyiRS3oEnD.SfIrb6', 50, 'Borderlinda', '../../Img/Perfis/download (4).jpeg', '../../Img/Loja de Pontos/moldura_cogumelo.png'),
-(5, 'bellatrizxgaldinotorres@gmail.com', '501.288.955-86', 'biabia', '$2y$10$iI6OsNkHUR3FAw887IIb5uCPhnf6w9LWnUa9URr2PPB8Cu8G67Rje', 50, 'bellatrizx', '../../Img/Perfis/Snoopy Reading A Book _) Sticker.jpeg', ''),
-(6, 'Jeeh_iero@gmail.com', '222.222.222-22', 'deta', '$2y$10$lgYbylQmo4s/YHKFRgne/ulSPUnjjtCm0BhWx3WjFTblGG/t6skcO', 50, 'Heyhugme', '../../Img/Perfis/Arthur.jpeg', ''),
-(7, 'GabrielleSouza@gmail.com', '111.111.111-11', 'Aby', '$2y$10$M0NAMrSYgpUtu7cyg57IHOlsb7T9sUT0wrgdxYPzhW1g53xV9IW1y', 50, 'Bagi', '../../Img/Perfis/Sam.jpeg', '../../Img/Loja de Pontos/moldura_cogumelo.png'),
-(8, 'YasmimBorges@gmail.com', '222.222.222-20', 'Mamim', '$2y$10$JO95a1cDnM/HOQa4PYroOeKUz2mbym/L4RZgInb4qM7Qz1Gnf9pLO', 50, 'Yasbomel', '../../Img/Perfis/Dean Winchester icon.jpeg', '../../Img/Loja de Pontos/moldura_caveira.png'),
-(9, 'NicollasLopes@gmail.com', '777.777.777-77', 'Nicollas', '$2y$10$pfs1dGLx8Mtpd9WZhd9q3eI27DYiyt1FGmU5qYp3RZMgFBeJx85JG', 50, 'nicollaszxn', '../../Img/Perfis/WhatsApp Image 2025-10-29 at 12.09.19 AM.jpeg', '../../Img/Loja de Pontos/moldura_coracao.png'),
-(10, 'AnaLivia@gmail.com', '444.444.444-44', 'Nali', '$2y$10$RQqiglvuKToNwIVPhm1Jd.wfn0MRov2ezpCxF.YV00OQ5aEfqgJMa', 50, 'Analivia', '../../Img/Perfis/Andressa Urach usa microshort ao posar com top da Seleção.jpeg', ''),
-(11, 'JayaneElias@gmail.com', '444.444.444-40', 'Jay', '$2y$10$hjwYyi7Rmoho3l7A6uuAJu2dqE8lGfw8GsqForUCwgXjkV4qCGbjS', 50, 'Jayane', '../../Img/Perfis/890fa97d-4547-4370-84dd-02f359d210d6.jpeg', ''),
-(12, 'BeatrizBatista@gmail.com', '555.555.555-50', 'Bia', '$2y$10$skeH08/BGcaf32WCBHBqUOxitlzZBkLydYiDsiFpw3.pbJCY/fJl2', 50, 'Biaxx', '../../Img/Perfis/༻𓊈𒆜hello kitty 𒆜𓊉༺.jpeg', '');
+INSERT INTO `cliente` (`ID_cliente`, `email`, `CPF`, `nome`, `senha`, `pontos`, `usuario`, `foto`, `moldura`, `ultimo_resgate`) VALUES
+(1, 'galdinob596@gmail.com', '501.988.228-85', 'Bea', '$2y$10$FfLDzgzMPTt10nkYi6VWOeXevDDlwdeVJ6IaoeiFpSZ70FpA1b63O', 50, 'Bellatrizx', '../../Img/Perfis/castiel supernatural icon.jpeg', '../../Img/Loja de Pontos/moldura_natalina.png', '2025-11-23'),
+(3, 'EstherGaldino@gmail.com', '212.252.365-78', 'Esther', '$2y$10$s4yp9GD50NlcBIi24y26IOFfclbqMyuPTG9oEyiRS3oEnD.SfIrb6', 130, 'Ste', '../../Img/Perfis/download (4).jpeg', '../../Img/Loja de Pontos/moldura_cogumelo.png', '2025-11-01'),
+(5, 'bellatrizxgaldinotorres@gmail.com', '501.288.955-86', 'biabia', '$2y$10$iI6OsNkHUR3FAw887IIb5uCPhnf6w9LWnUa9URr2PPB8Cu8G67Rje', 50, 'bellatrizx', '../../Img/Perfis/Snoopy Reading A Book _) Sticker.jpeg', '', NULL),
+(6, 'Jeeh_iero@gmail.com', '222.222.222-22', 'deta', '$2y$10$lgYbylQmo4s/YHKFRgne/ulSPUnjjtCm0BhWx3WjFTblGG/t6skcO', 50, 'Heyhugme', '../../Img/Perfis/Arthur.jpeg', '', NULL),
+(7, 'GabrielleSouza@gmail.com', '111.111.111-11', 'Aby', '$2y$10$M0NAMrSYgpUtu7cyg57IHOlsb7T9sUT0wrgdxYPzhW1g53xV9IW1y', 50, 'Bagi', '../../Img/Perfis/Sam.jpeg', '../../Img/Loja de Pontos/moldura_cogumelo.png', NULL),
+(8, 'YasmimBorges@gmail.com', '222.222.222-20', 'Mamim', '$2y$10$JO95a1cDnM/HOQa4PYroOeKUz2mbym/L4RZgInb4qM7Qz1Gnf9pLO', 50, 'Yasbomel', '../../Img/Perfis/Dean Winchester icon.jpeg', '../../Img/Loja de Pontos/moldura_caveira.png', NULL),
+(9, 'NicollasLopes@gmail.com', '777.777.777-77', 'Nicollas', '$2y$10$pfs1dGLx8Mtpd9WZhd9q3eI27DYiyt1FGmU5qYp3RZMgFBeJx85JG', 50, 'nicollaszxn', '../../Img/Perfis/WhatsApp Image 2025-10-29 at 12.09.19 AM.jpeg', '../../Img/Loja de Pontos/moldura_coracao.png', NULL),
+(10, 'AnaLivia@gmail.com', '444.444.444-44', 'Nali', '$2y$10$RQqiglvuKToNwIVPhm1Jd.wfn0MRov2ezpCxF.YV00OQ5aEfqgJMa', 50, 'Analivia', '../../Img/Perfis/Andressa Urach usa microshort ao posar com top da Seleção.jpeg', '', NULL),
+(11, 'JayaneElias@gmail.com', '444.444.444-40', 'Jay', '$2y$10$hjwYyi7Rmoho3l7A6uuAJu2dqE8lGfw8GsqForUCwgXjkV4qCGbjS', 50, 'Jayane', '../../Img/Perfis/890fa97d-4547-4370-84dd-02f359d210d6.jpeg', '', NULL),
+(12, 'BeatrizBatista@gmail.com', '555.555.555-50', 'Bia', '$2y$10$skeH08/BGcaf32WCBHBqUOxitlzZBkLydYiDsiFpw3.pbJCY/fJl2', 50, 'Biaxx', '../../Img/Perfis/༻𓊈𒆜hello kitty 𒆜𓊉༺.jpeg', '', NULL);
 
 -- --------------------------------------------------------
 
@@ -208,8 +211,28 @@ CREATE TABLE `conquista` (
   `ID_jogo` int(11) NOT NULL,
   `nome` varchar(100) NOT NULL,
   `descricao` varchar(255) DEFAULT NULL,
-  `pontos` int(11) DEFAULT 0
+  `pontos` int(11) DEFAULT 0,
+  `img` varchar(255) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `conquista`
+--
+
+INSERT INTO `conquista` (`ID_conq`, `ID_jogo`, `nome`, `descricao`, `pontos`, `img`) VALUES
+(1, 15, 'Altitude é Atitude', 'Exploração no ar', 10, '../../Img/Conquistas/Limbo/c1.png'),
+(2, 15, 'Direção Errada', 'Isso não está certo', 10, '../../Img/Conquistas/Limbo/c2.png'),
+(3, 15, 'O Crédito a Quem é Devido', 'A persistência é a sua própria recompensa', 20, '../../Img/Conquistas/Limbo/c9.png'),
+(4, 15, 'Sozinho no Escuro', 'Sob o artrópode', 10, '../../Img/Conquistas/Limbo/c11.jpg'),
+(5, 15, 'Guiado pelas Faíscas', 'O segredo está no caixote', 15, '../../Img/Conquistas/Limbo/c6.png'),
+(6, 15, 'Voltar Atrás', 'Sobe os caixotes', 10, '../../Img/Conquistas/Limbo/c5.png'),
+(7, 15, 'Exploração Urbana', 'Envolve levantar coisas pesadas', 15, '../../Img/Conquistas/Limbo/c12.png'),
+(8, 15, 'Subsolo', 'Passagem vertical', 20, '../../Img/Conquistas/Limbo/c7.png'),
+(9, 15, 'A Subir', 'Não fiques em baixo por causa da gravidade', 20, '../../Img/Conquistas/Limbo/c8.png'),
+(10, 15, 'Está Preso', 'Prepara um desembarque', 15, '../../Img/Conquistas/Limbo/c3.png'),
+(11, 15, 'Escalar a Engrenagem', 'Não puxes a alavanca só porque podes', 25, '../../Img/Conquistas/Limbo/c4.png'),
+(12, 15, 'DING', NULL, 30, '../../Img/Conquistas/Limbo/c10.png'),
+(13, 15, 'Não Vale a Pena Morrer', 'Acaba o jogo de uma assentada com cinco mortes ou menos', 30, '../../Img/Conquistas/Limbo/c13.png');
 
 -- --------------------------------------------------------
 
@@ -293,6 +316,26 @@ INSERT INTO `genero` (`Id_Gen`, `Nome`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estrutura para tabela `inventario_pontos`
+--
+
+CREATE TABLE `inventario_pontos` (
+  `id_inventario` int(11) NOT NULL,
+  `id_cliente` int(11) NOT NULL,
+  `id_item` int(11) NOT NULL,
+  `data_compra` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `inventario_pontos`
+--
+
+INSERT INTO `inventario_pontos` (`id_inventario`, `id_cliente`, `id_item`, `data_compra`) VALUES
+(3, 1, 2, '2025-11-23 12:56:35');
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura para tabela `item_pontos`
 --
 
@@ -301,8 +344,18 @@ CREATE TABLE `item_pontos` (
   `nome` varchar(100) NOT NULL,
   `descricao` varchar(255) DEFAULT NULL,
   `tipo` varchar(50) DEFAULT NULL,
-  `custo_pontos` int(11) NOT NULL
+  `custo_pontos` int(11) NOT NULL,
+  `Img` varchar(250) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `item_pontos`
+--
+
+INSERT INTO `item_pontos` (`ID_item`, `nome`, `descricao`, `tipo`, `custo_pontos`, `Img`) VALUES
+(1, 'Gris', 'Jogo Gris', 'Jogo', 1550, '../../Img/Jogos/gris.png'),
+(2, 'Moldura Natal', 'Moldura com temas natalinos', 'Moldura', 250, '../../Img/Loja de Pontos/moldura_natalina.png'),
+(3, 'Moldura Natureza', 'Moldura com cogumelos, flores e outros elementos', 'Moldura', 250, '../../Img/Loja de Pontos/moldura_natureza_1.png');
 
 -- --------------------------------------------------------
 
@@ -315,56 +368,57 @@ CREATE TABLE `jogo` (
   `nome` varchar(100) NOT NULL,
   `preco` decimal(10,2) NOT NULL,
   `desconto` decimal(5,2) DEFAULT 0.00,
-  `Img` varchar(255) DEFAULT NULL
+  `Img` varchar(255) DEFAULT NULL,
+  `banner` varchar(255) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `jogo`
 --
 
-INSERT INTO `jogo` (`ID_jogo`, `nome`, `preco`, `desconto`, `Img`) VALUES
-(1, 'Cuphead', 36.00, NULL, '../../Img/Jogos/cuphead.png'),
-(3, 'Hollow Knight', 150.00, NULL, '../../Img/Jogos/hollow_knight.png'),
-(4, 'Five Nights at Freddy´s: Into The Pit', 41.00, 30.00, '../../Img/Jogos/into_the_pit.png'),
-(5, 'Train SImulator', 90.00, 10.00, '../../Img/Jogos/train.png\r\n'),
-(6, 'Surgeon 2', 74.00, 25.00, '../../Img/Jogos/surgeon.png\r\n'),
-(7, 'Snow Runner ', 84.00, 14.00, '../../Img/Jogos/snow.png\r\n'),
-(8, 'The Sims 4 ', 0.00, 0.00, '../../Img/Jogos/the_sims_4.png\r\n'),
-(9, 'Rimworld', 95.00, 5.00, '../../Img/Jogos/rimworld.png\r\n'),
-(10, 'Reaper ', 15.00, 10.00, '../../Img/Jogos/reaper.png\r\n'),
-(11, 'Project Zomboid ', 55.00, 10.00, '../../Img/Jogos/project_zomboid.png\r\n'),
-(12, 'Phasmophobia', 50.00, 5.00, '../../Img/Jogos/phasmophobia.png\r\n'),
-(13, 'PC Building ', 50.00, 5.00, '../../Img/Jogos/pc_building.png\r\n'),
-(14, 'Oknytt', 15.00, 5.00, '../../Img/Jogos/oknytt.png\r\n'),
-(15, 'Limbo ', 30.00, 0.00, '../../Img/Jogos/limbo.png\r\n'),
-(16, 'Left 4 Dead', 30.00, 0.00, '../../Img/Jogos/left_4_dead.png\r\n'),
-(17, 'House Flipper', 70.00, 15.00, '../../Img/Jogos/house_flipper.png\r\n'),
-(18, 'Hollow Knigth: Silksong', 45.00, 0.00, '../../Img/Jogos/hollow_knight_silksong.png\r\n'),
-(19, 'GRIS', 40.00, 15.00, '../../Img/Jogos/gris.png\r\n'),
-(20, 'Game Dev Tycoon ', 27.00, 0.00, '../../Img/Jogos/game_dev.png\r\n'),
-(21, 'Fishing Planet ', 0.00, 0.00, '../../Img/Jogos/fishing_planet.png\r\n'),
-(22, 'Euro Truck 2 ', 58.00, 0.00, '../../Img/Jogos/euro_truck.png\r\n'),
-(23, 'Don\'t Starve Together ', 25.00, 0.00, '../../Img/Jogos/dont_starve_together.png\r\n'),
-(24, 'Dead Cells', 45.00, 0.00, '../../Img/Jogos/dead_cells.png\r\n'),
-(25, 'Cooking Simulator', 50.00, 25.00, '../../Img/Jogos/cooking.png\r\n'),
-(26, 'Cities Slylines 2', 150.00, 25.00, '../../Img/Jogos/cities_skyline.png\r\n'),
-(27, 'Celeste ', 50.00, 15.00, '../../Img/Jogos/celeste.png\r\n'),
-(29, 'Bus Simulator 21', 100.00, 15.00, '../../Img/Jogos/bus.png\r\n'),
-(30, 'Buckshot Roulette', 8.00, 0.00, '../../Img/Jogos/buckshot_roulette.png\r\n'),
-(31, 'Banished ', 30.00, 0.00, '../../Img/Jogos/banished.png\r\n'),
-(33, 'Assassin\'s Creed ', 30.00, 0.00, '../../Img/Jogos/AssassinsCreed.jpg'),
-(34, 'Unpacking', 15.00, 0.00, '../../Img/Jogos/unpacking.png'),
-(35, 'Resident Evil 6', 10.00, 0.00, '../../Img/Jogos/resident_evil.png\r\n'),
-(36, 'Need for Speed', 30.00, 0.00, '../../Img/Jogos/need_for_speed.png'),
-(37, 'Moonlighter', 35.00, 0.00, '../../Img/Jogos/moonlighter.png'),
-(39, 'Have a Nice Death', 20.00, 0.00, '../../Img/Jogos/have_a_nice_death.png'),
-(40, 'Goat', 15.00, 0.00, '../../Img/Jogos/goat.png'),
-(41, 'Fortnite', 0.00, 0.00, '../../Img/Jogos/Fortnite.jpg'),
-(42, 'Cult of the Lamb', 30.00, 0.00, '../../Img/Jogos/cult_of_the_lamb.png'),
-(43, 'Bakery Simulator', 45.00, 0.00, '../../Img/Jogos/bakery.png'),
-(44, 'Stardew Valey', 30.00, 0.00, '../../Img/Jogos/stardew_valley.png'),
-(45, 'The Wild at Heart ', 40.00, 0.00, '../../Img/Jogos/the_wild_at_heart.png'),
-(46, 'Skul: The Hero Slayer ', 55.00, 0.00, '../../Img/Jogos/skul.png');
+INSERT INTO `jogo` (`ID_jogo`, `nome`, `preco`, `desconto`, `Img`, `banner`) VALUES
+(1, 'Cuphead', 36.00, NULL, '../../Img/Jogos/cuphead.png', NULL),
+(3, 'Hollow Knight', 150.00, NULL, '../../Img/Jogos/hollow_knight.png', NULL),
+(4, 'Five Nights at Freddy´s: Into The Pit', 41.00, 30.00, '../../Img/Jogos/into_the_pit.png', NULL),
+(5, 'Train SImulator', 90.00, 10.00, '../../Img/Jogos/train.png\r\n', NULL),
+(6, 'Surgeon 2', 74.00, 25.00, '../../Img/Jogos/surgeon.png\r\n', NULL),
+(7, 'Snow Runner ', 84.00, 14.00, '../../Img/Jogos/snow.png\r\n', NULL),
+(8, 'The Sims 4 ', 0.00, 0.00, '../../Img/Jogos/the_sims_4.png\r\n', NULL),
+(9, 'Rimworld', 95.00, 5.00, '../../Img/Jogos/rimworld.png\r\n', NULL),
+(10, 'Reaper ', 15.00, 10.00, '../../Img/Jogos/reaper.png\r\n', NULL),
+(11, 'Project Zomboid ', 55.00, 10.00, '../../Img/Jogos/project_zomboid.png\r\n', '../../Img/Conquistas/Banners/project_zomboid.jpg'),
+(12, 'Phasmophobia', 50.00, 5.00, '../../Img/Jogos/phasmophobia.png\r\n', NULL),
+(13, 'PC Building ', 50.00, 5.00, '../../Img/Jogos/pc_building.png\r\n', NULL),
+(14, 'Oknytt', 15.00, 5.00, '../../Img/Jogos/oknytt.png\r\n', NULL),
+(15, 'Limbo ', 30.00, 0.00, '../../Img/Jogos/limbo.png\r\n', '../../Img/Conquistas/Banners/limbo.png'),
+(16, 'Left 4 Dead', 30.00, 0.00, '../../Img/Jogos/left_4_dead.png\r\n', NULL),
+(17, 'House Flipper', 70.00, 15.00, '../../Img/Jogos/house_flipper.png\r\n', NULL),
+(18, 'Hollow Knigth: Silksong', 45.00, 0.00, '../../Img/Jogos/hollow_knight_silksong.png\r\n', NULL),
+(19, 'GRIS', 40.00, 15.00, '../../Img/Jogos/gris.png\r\n', NULL),
+(20, 'Game Dev Tycoon ', 27.00, 0.00, '../../Img/Jogos/game_dev.png\r\n', NULL),
+(21, 'Fishing Planet ', 0.00, 0.00, '../../Img/Jogos/fishing_planet.png\r\n', NULL),
+(22, 'Euro Truck 2 ', 58.00, 0.00, '../../Img/Jogos/euro_truck.png\r\n', NULL),
+(23, 'Don\'t Starve Together ', 25.00, 0.00, '../../Img/Jogos/dont_starve_together.png\r\n', NULL),
+(24, 'Dead Cells', 45.00, 0.00, '../../Img/Jogos/dead_cells.png\r\n', NULL),
+(25, 'Cooking Simulator', 50.00, 25.00, '../../Img/Jogos/cooking.png\r\n', NULL),
+(26, 'Cities Slylines 2', 150.00, 25.00, '../../Img/Jogos/cities_skyline.png\r\n', NULL),
+(27, 'Celeste ', 50.00, 15.00, '../../Img/Jogos/celeste.png\r\n', NULL),
+(29, 'Bus Simulator 21', 100.00, 15.00, '../../Img/Jogos/bus.png\r\n', NULL),
+(30, 'Buckshot Roulette', 8.00, 0.00, '../../Img/Jogos/buckshot_roulette.png\r\n', NULL),
+(31, 'Banished ', 30.00, 0.00, '../../Img/Jogos/banished.png\r\n', NULL),
+(33, 'Assassin\'s Creed ', 30.00, 0.00, '../../Img/Jogos/AssassinsCreed.jpg', NULL),
+(34, 'Unpacking', 15.00, 0.00, '../../Img/Jogos/unpacking.png', NULL),
+(35, 'Resident Evil 6', 10.00, 0.00, '../../Img/Jogos/resident_evil.png\r\n', NULL),
+(36, 'Need for Speed', 30.00, 0.00, '../../Img/Jogos/need_for_speed.png', NULL),
+(37, 'Moonlighter', 35.00, 0.00, '../../Img/Jogos/moonlighter.png', NULL),
+(39, 'Have a Nice Death', 20.00, 0.00, '../../Img/Jogos/have_a_nice_death.png', NULL),
+(40, 'Goat', 15.00, 0.00, '../../Img/Jogos/goat.png', NULL),
+(41, 'Fortnite', 0.00, 0.00, '../../Img/Jogos/Fortnite.jpg', NULL),
+(42, 'Cult of the Lamb', 30.00, 0.00, '../../Img/Jogos/cult_of_the_lamb.png', NULL),
+(43, 'Bakery Simulator', 45.00, 0.00, '../../Img/Jogos/bakery.png', NULL),
+(44, 'Stardew Valey', 30.00, 0.00, '../../Img/Jogos/stardew_valley.png', NULL),
+(45, 'The Wild at Heart ', 40.00, 0.00, '../../Img/Jogos/the_wild_at_heart.png', NULL),
+(46, 'Skul: The Hero Slayer ', 55.00, 0.00, '../../Img/Jogos/skul.png', NULL);
 
 -- --------------------------------------------------------
 
@@ -491,7 +545,11 @@ CREATE TABLE `pedido_item` (
 --
 
 INSERT INTO `pedido_item` (`ID_item`, `ID_pedido`, `ID_jogo`, `quantidade`) VALUES
-(1, 1, 43, 1);
+(1, 1, 43, 1),
+(2, 2, 34, 1),
+(3, 2, 46, 1),
+(4, 3, 34, 1),
+(5, 4, 21, 1);
 
 -- --------------------------------------------------------
 
@@ -514,7 +572,10 @@ CREATE TABLE `resumo_pedido` (
 --
 
 INSERT INTO `resumo_pedido` (`ID_pedido`, `ID_cliente`, `data_pedido`, `status`, `metodo_pagamento`, `total`, `ID_cupom`) VALUES
-(1, 2, '2025-09-28 16:55:06', 'pendente', 'pix', 45.00, NULL);
+(1, 2, '2025-09-28 16:55:06', 'pendente', 'pix', 45.00, NULL),
+(2, 3, '2025-11-01 22:32:47', 'pendente', 'paypal', 70.00, NULL),
+(3, 3, '2025-11-01 22:42:35', 'pendente', 'paypal', 15.00, NULL),
+(4, 1, '2025-11-23 11:53:22', 'pendente', 'pix', 0.00, NULL);
 
 -- --------------------------------------------------------
 
@@ -615,6 +676,13 @@ ALTER TABLE `genero`
   ADD PRIMARY KEY (`Id_Gen`);
 
 --
+-- Índices de tabela `inventario_pontos`
+--
+ALTER TABLE `inventario_pontos`
+  ADD PRIMARY KEY (`id_inventario`),
+  ADD UNIQUE KEY `unique_cliente_item` (`id_cliente`,`id_item`);
+
+--
 -- Índices de tabela `item_pontos`
 --
 ALTER TABLE `item_pontos`
@@ -666,7 +734,7 @@ ALTER TABLE `suporte`
 -- AUTO_INCREMENT de tabela `amizade`
 --
 ALTER TABLE `amizade`
-  MODIFY `id_amizade` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_amizade` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de tabela `avaliacao`
@@ -684,7 +752,7 @@ ALTER TABLE `biblioteca`
 -- AUTO_INCREMENT de tabela `carrinho`
 --
 ALTER TABLE `carrinho`
-  MODIFY `ID_carrinho` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `ID_carrinho` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT de tabela `cliente`
@@ -702,7 +770,7 @@ ALTER TABLE `cliente_jogo`
 -- AUTO_INCREMENT de tabela `conquista`
 --
 ALTER TABLE `conquista`
-  MODIFY `ID_conq` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_conq` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de tabela `cupom`
@@ -723,10 +791,16 @@ ALTER TABLE `genero`
   MODIFY `Id_Gen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
+-- AUTO_INCREMENT de tabela `inventario_pontos`
+--
+ALTER TABLE `inventario_pontos`
+  MODIFY `id_inventario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT de tabela `item_pontos`
 --
 ALTER TABLE `item_pontos`
-  MODIFY `ID_item` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_item` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `jogo`
@@ -744,13 +818,13 @@ ALTER TABLE `notificacao`
 -- AUTO_INCREMENT de tabela `pedido_item`
 --
 ALTER TABLE `pedido_item`
-  MODIFY `ID_item` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID_item` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `resumo_pedido`
 --
 ALTER TABLE `resumo_pedido`
-  MODIFY `ID_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `suporte`
