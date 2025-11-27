@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 23/11/2025 às 18:10
--- Versão do servidor: 10.4.32-MariaDB
--- Versão do PHP: 8.2.12
+-- Tempo de geração: 27-Nov-2025 às 17:22
+-- Versão do servidor: 10.4.22-MariaDB
+-- versão do PHP: 8.0.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -26,7 +26,7 @@ USE `skulljabb`;
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `amizade`
+-- Estrutura da tabela `amizade`
 --
 
 CREATE TABLE `amizade` (
@@ -36,10 +36,10 @@ CREATE TABLE `amizade` (
   `status` enum('pendente','aceito','recusado') DEFAULT 'pendente',
   `data_solicitacao` timestamp NOT NULL DEFAULT current_timestamp(),
   `data_resposta` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Despejando dados para a tabela `amizade`
+-- Extraindo dados da tabela `amizade`
 --
 
 INSERT INTO `amizade` (`id_amizade`, `id_solicitante`, `id_recebedor`, `status`, `data_solicitacao`, `data_resposta`) VALUES
@@ -51,13 +51,13 @@ INSERT INTO `amizade` (`id_amizade`, `id_solicitante`, `id_recebedor`, `status`,
 (16, 11, 3, 'recusado', '2025-10-29 03:17:36', '2025-10-29 01:09:56'),
 (18, 11, 3, 'aceito', '2025-11-02 01:28:33', '2025-11-01 22:35:43'),
 (20, 9, 3, 'aceito', '2025-11-02 01:36:20', '2025-11-01 22:42:01'),
-(22, 1, 7, 'pendente', '2025-11-02 01:49:34', NULL),
+(22, 1, 7, 'aceito', '2025-11-02 01:49:34', '2025-11-27 13:04:14'),
 (23, 1, 8, 'pendente', '2025-11-02 01:49:38', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `avaliacao`
+-- Estrutura da tabela `avaliacao`
 --
 
 CREATE TABLE `avaliacao` (
@@ -67,10 +67,10 @@ CREATE TABLE `avaliacao` (
   `nota` tinyint(4) NOT NULL,
   `comentario` text DEFAULT NULL,
   `data_avaliacao` datetime DEFAULT current_timestamp()
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
--- Despejando dados para a tabela `avaliacao`
+-- Extraindo dados da tabela `avaliacao`
 --
 
 INSERT INTO `avaliacao` (`ID_avaliacao`, `ID_cliente`, `ID_jogo`, `nota`, `comentario`, `data_avaliacao`) VALUES
@@ -84,7 +84,7 @@ INSERT INTO `avaliacao` (`ID_avaliacao`, `ID_cliente`, `ID_jogo`, `nota`, `comen
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `biblioteca`
+-- Estrutura da tabela `biblioteca`
 --
 
 CREATE TABLE `biblioteca` (
@@ -92,10 +92,10 @@ CREATE TABLE `biblioteca` (
   `id_cliente` int(11) NOT NULL,
   `id_jogo` int(11) NOT NULL,
   `data_compra` datetime DEFAULT current_timestamp()
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
--- Despejando dados para a tabela `biblioteca`
+-- Extraindo dados da tabela `biblioteca`
 --
 
 INSERT INTO `biblioteca` (`id_biblioteca`, `id_cliente`, `id_jogo`, `data_compra`) VALUES
@@ -108,7 +108,7 @@ INSERT INTO `biblioteca` (`id_biblioteca`, `id_cliente`, `id_jogo`, `data_compra
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `carrinho`
+-- Estrutura da tabela `carrinho`
 --
 
 CREATE TABLE `carrinho` (
@@ -116,10 +116,10 @@ CREATE TABLE `carrinho` (
   `ID_cliente` int(11) NOT NULL,
   `ID_jogo` int(11) NOT NULL,
   `quantidade` int(11) NOT NULL DEFAULT 1
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
--- Despejando dados para a tabela `carrinho`
+-- Extraindo dados da tabela `carrinho`
 --
 
 INSERT INTO `carrinho` (`ID_carrinho`, `ID_cliente`, `ID_jogo`, `quantidade`) VALUES
@@ -130,7 +130,7 @@ INSERT INTO `carrinho` (`ID_carrinho`, `ID_cliente`, `ID_jogo`, `quantidade`) VA
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `cliente`
+-- Estrutura da tabela `cliente`
 --
 
 CREATE TABLE `cliente` (
@@ -144,10 +144,10 @@ CREATE TABLE `cliente` (
   `foto` varchar(255) NOT NULL DEFAULT '../../Img/Perfis/none.png',
   `moldura` varchar(255) NOT NULL,
   `ultimo_resgate` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Despejando dados para a tabela `cliente`
+-- Extraindo dados da tabela `cliente`
 --
 
 INSERT INTO `cliente` (`ID_cliente`, `email`, `CPF`, `nome`, `senha`, `pontos`, `usuario`, `foto`, `moldura`, `ultimo_resgate`) VALUES
@@ -165,31 +165,31 @@ INSERT INTO `cliente` (`ID_cliente`, `email`, `CPF`, `nome`, `senha`, `pontos`, 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `cliente_conquista`
+-- Estrutura da tabela `cliente_conquista`
 --
 
 CREATE TABLE `cliente_conquista` (
   `ID_cliente` int(11) NOT NULL,
   `ID_conq` int(11) NOT NULL,
   `data_desbloqueio` datetime DEFAULT current_timestamp()
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `cliente_item`
+-- Estrutura da tabela `cliente_item`
 --
 
 CREATE TABLE `cliente_item` (
   `ID_cliente` int(11) NOT NULL,
   `ID_item` int(11) NOT NULL,
   `data_compra` datetime DEFAULT current_timestamp()
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `cliente_jogo`
+-- Estrutura da tabela `cliente_jogo`
 --
 
 CREATE TABLE `cliente_jogo` (
@@ -198,12 +198,12 @@ CREATE TABLE `cliente_jogo` (
   `id_jogo` int(11) NOT NULL,
   `horas_jogadas` decimal(6,1) DEFAULT 0.0,
   `data_ultimo_jogo` datetime DEFAULT current_timestamp()
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `conquista`
+-- Estrutura da tabela `conquista`
 --
 
 CREATE TABLE `conquista` (
@@ -213,10 +213,10 @@ CREATE TABLE `conquista` (
   `descricao` varchar(255) DEFAULT NULL,
   `pontos` int(11) DEFAULT 0,
   `img` varchar(255) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
--- Despejando dados para a tabela `conquista`
+-- Extraindo dados da tabela `conquista`
 --
 
 INSERT INTO `conquista` (`ID_conq`, `ID_jogo`, `nome`, `descricao`, `pontos`, `img`) VALUES
@@ -237,7 +237,7 @@ INSERT INTO `conquista` (`ID_conq`, `ID_jogo`, `nome`, `descricao`, `pontos`, `i
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `cupom`
+-- Estrutura da tabela `cupom`
 --
 
 CREATE TABLE `cupom` (
@@ -247,12 +247,12 @@ CREATE TABLE `cupom` (
   `desconto` decimal(10,2) NOT NULL,
   `validade` date NOT NULL,
   `ativo` tinyint(1) DEFAULT 1
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `desenvolvedor`
+-- Estrutura da tabela `desenvolvedor`
 --
 
 CREATE TABLE `desenvolvedor` (
@@ -262,10 +262,10 @@ CREATE TABLE `desenvolvedor` (
   `status` tinyint(1) DEFAULT 0,
   `portfolio` varchar(500) DEFAULT NULL,
   `data_inscricao` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
--- Despejando dados para a tabela `desenvolvedor`
+-- Extraindo dados da tabela `desenvolvedor`
 --
 
 INSERT INTO `desenvolvedor` (`ID_desenvolvedor`, `ID_cliente`, `descricao`, `status`, `portfolio`, `data_inscricao`) VALUES
@@ -274,16 +274,16 @@ INSERT INTO `desenvolvedor` (`ID_desenvolvedor`, `ID_cliente`, `descricao`, `sta
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `genero`
+-- Estrutura da tabela `genero`
 --
 
 CREATE TABLE `genero` (
   `Id_Gen` int(11) NOT NULL,
   `Nome` varchar(100) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
--- Despejando dados para a tabela `genero`
+-- Extraindo dados da tabela `genero`
 --
 
 INSERT INTO `genero` (`Id_Gen`, `Nome`) VALUES
@@ -316,7 +316,7 @@ INSERT INTO `genero` (`Id_Gen`, `Nome`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `inventario_pontos`
+-- Estrutura da tabela `inventario_pontos`
 --
 
 CREATE TABLE `inventario_pontos` (
@@ -324,10 +324,10 @@ CREATE TABLE `inventario_pontos` (
   `id_cliente` int(11) NOT NULL,
   `id_item` int(11) NOT NULL,
   `data_compra` datetime DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Despejando dados para a tabela `inventario_pontos`
+-- Extraindo dados da tabela `inventario_pontos`
 --
 
 INSERT INTO `inventario_pontos` (`id_inventario`, `id_cliente`, `id_item`, `data_compra`) VALUES
@@ -336,7 +336,7 @@ INSERT INTO `inventario_pontos` (`id_inventario`, `id_cliente`, `id_item`, `data
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `item_pontos`
+-- Estrutura da tabela `item_pontos`
 --
 
 CREATE TABLE `item_pontos` (
@@ -346,10 +346,10 @@ CREATE TABLE `item_pontos` (
   `tipo` varchar(50) DEFAULT NULL,
   `custo_pontos` int(11) NOT NULL,
   `Img` varchar(250) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
--- Despejando dados para a tabela `item_pontos`
+-- Extraindo dados da tabela `item_pontos`
 --
 
 INSERT INTO `item_pontos` (`ID_item`, `nome`, `descricao`, `tipo`, `custo_pontos`, `Img`) VALUES
@@ -360,7 +360,7 @@ INSERT INTO `item_pontos` (`ID_item`, `nome`, `descricao`, `tipo`, `custo_pontos
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `jogo`
+-- Estrutura da tabela `jogo`
 --
 
 CREATE TABLE `jogo` (
@@ -370,69 +370,70 @@ CREATE TABLE `jogo` (
   `desconto` decimal(5,2) DEFAULT 0.00,
   `Img` varchar(255) DEFAULT NULL,
   `banner` varchar(255) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
--- Despejando dados para a tabela `jogo`
+-- Extraindo dados da tabela `jogo`
 --
 
 INSERT INTO `jogo` (`ID_jogo`, `nome`, `preco`, `desconto`, `Img`, `banner`) VALUES
-(1, 'Cuphead', 36.00, NULL, '../../Img/Jogos/cuphead.png', NULL),
-(3, 'Hollow Knight', 150.00, NULL, '../../Img/Jogos/hollow_knight.png', NULL),
-(4, 'Five Nights at Freddy´s: Into The Pit', 41.00, 30.00, '../../Img/Jogos/into_the_pit.png', NULL),
-(5, 'Train SImulator', 90.00, 10.00, '../../Img/Jogos/train.png\r\n', NULL),
-(6, 'Surgeon 2', 74.00, 25.00, '../../Img/Jogos/surgeon.png\r\n', NULL),
-(7, 'Snow Runner ', 84.00, 14.00, '../../Img/Jogos/snow.png\r\n', NULL),
-(8, 'The Sims 4 ', 0.00, 0.00, '../../Img/Jogos/the_sims_4.png\r\n', NULL),
-(9, 'Rimworld', 95.00, 5.00, '../../Img/Jogos/rimworld.png\r\n', NULL),
-(10, 'Reaper ', 15.00, 10.00, '../../Img/Jogos/reaper.png\r\n', NULL),
-(11, 'Project Zomboid ', 55.00, 10.00, '../../Img/Jogos/project_zomboid.png\r\n', '../../Img/Conquistas/Banners/project_zomboid.jpg'),
-(12, 'Phasmophobia', 50.00, 5.00, '../../Img/Jogos/phasmophobia.png\r\n', NULL),
-(13, 'PC Building ', 50.00, 5.00, '../../Img/Jogos/pc_building.png\r\n', NULL),
-(14, 'Oknytt', 15.00, 5.00, '../../Img/Jogos/oknytt.png\r\n', NULL),
-(15, 'Limbo ', 30.00, 0.00, '../../Img/Jogos/limbo.png\r\n', '../../Img/Conquistas/Banners/limbo.png'),
-(16, 'Left 4 Dead', 30.00, 0.00, '../../Img/Jogos/left_4_dead.png\r\n', NULL),
-(17, 'House Flipper', 70.00, 15.00, '../../Img/Jogos/house_flipper.png\r\n', NULL),
-(18, 'Hollow Knigth: Silksong', 45.00, 0.00, '../../Img/Jogos/hollow_knight_silksong.png\r\n', NULL),
-(19, 'GRIS', 40.00, 15.00, '../../Img/Jogos/gris.png\r\n', NULL),
-(20, 'Game Dev Tycoon ', 27.00, 0.00, '../../Img/Jogos/game_dev.png\r\n', NULL),
-(21, 'Fishing Planet ', 0.00, 0.00, '../../Img/Jogos/fishing_planet.png\r\n', NULL),
-(22, 'Euro Truck 2 ', 58.00, 0.00, '../../Img/Jogos/euro_truck.png\r\n', NULL),
-(23, 'Don\'t Starve Together ', 25.00, 0.00, '../../Img/Jogos/dont_starve_together.png\r\n', NULL),
-(24, 'Dead Cells', 45.00, 0.00, '../../Img/Jogos/dead_cells.png\r\n', NULL),
-(25, 'Cooking Simulator', 50.00, 25.00, '../../Img/Jogos/cooking.png\r\n', NULL),
-(26, 'Cities Slylines 2', 150.00, 25.00, '../../Img/Jogos/cities_skyline.png\r\n', NULL),
-(27, 'Celeste ', 50.00, 15.00, '../../Img/Jogos/celeste.png\r\n', NULL),
-(29, 'Bus Simulator 21', 100.00, 15.00, '../../Img/Jogos/bus.png\r\n', NULL),
-(30, 'Buckshot Roulette', 8.00, 0.00, '../../Img/Jogos/buckshot_roulette.png\r\n', NULL),
-(31, 'Banished ', 30.00, 0.00, '../../Img/Jogos/banished.png\r\n', NULL),
-(33, 'Assassin\'s Creed ', 30.00, 0.00, '../../Img/Jogos/AssassinsCreed.jpg', NULL),
-(34, 'Unpacking', 15.00, 0.00, '../../Img/Jogos/unpacking.png', NULL),
-(35, 'Resident Evil 6', 10.00, 0.00, '../../Img/Jogos/resident_evil.png\r\n', NULL),
-(36, 'Need for Speed', 30.00, 0.00, '../../Img/Jogos/need_for_speed.png', NULL),
-(37, 'Moonlighter', 35.00, 0.00, '../../Img/Jogos/moonlighter.png', NULL),
-(39, 'Have a Nice Death', 20.00, 0.00, '../../Img/Jogos/have_a_nice_death.png', NULL),
-(40, 'Goat', 15.00, 0.00, '../../Img/Jogos/goat.png', NULL),
-(41, 'Fortnite', 0.00, 0.00, '../../Img/Jogos/Fortnite.jpg', NULL),
-(42, 'Cult of the Lamb', 30.00, 0.00, '../../Img/Jogos/cult_of_the_lamb.png', NULL),
-(43, 'Bakery Simulator', 45.00, 0.00, '../../Img/Jogos/bakery.png', NULL),
-(44, 'Stardew Valey', 30.00, 0.00, '../../Img/Jogos/stardew_valley.png', NULL),
-(45, 'The Wild at Heart ', 40.00, 0.00, '../../Img/Jogos/the_wild_at_heart.png', NULL),
-(46, 'Skul: The Hero Slayer ', 55.00, 0.00, '../../Img/Jogos/skul.png', NULL);
+(1, 'Cuphead', '36.00', NULL, '../../Img/Jogos/cuphead.png', NULL),
+(3, 'Hollow Knight', '150.00', NULL, '../../Img/Jogos/hollow_knight.png', NULL),
+(4, 'Five Nights at Freddy´s: Into The Pit', '41.00', '30.00', '../../Img/Jogos/into_the_pit.png', NULL),
+(5, 'Train SImulator', '90.00', '10.00', '../../Img/Jogos/train.png\r\n', NULL),
+(6, 'Surgeon 2', '74.00', '25.00', '../../Img/Jogos/surgeon.png\r\n', NULL),
+(7, 'Snow Runner ', '84.00', '14.00', '../../Img/Jogos/snow.png\r\n', NULL),
+(8, 'The Sims 4 ', '0.00', '0.00', '../../Img/Jogos/the_sims_4.png\r\n', NULL),
+(9, 'Rimworld', '95.00', '5.00', '../../Img/Jogos/rimworld.png\r\n', NULL),
+(10, 'Reaper ', '15.00', '10.00', '../../Img/Jogos/reaper.png\r\n', NULL),
+(11, 'Project Zomboid ', '55.00', '10.00', '../../Img/Jogos/project_zomboid.png\r\n', '../../Img/Conquistas/Banners/project_zomboid.jpg'),
+(12, 'Phasmophobia', '50.00', '5.00', '../../Img/Jogos/phasmophobia.png\r\n', NULL),
+(13, 'PC Building ', '50.00', '5.00', '../../Img/Jogos/pc_building.png\r\n', NULL),
+(14, 'Oknytt', '15.00', '5.00', '../../Img/Jogos/oknytt.png\r\n', NULL),
+(15, 'Limbo ', '30.00', '0.00', '../../Img/Jogos/limbo.png\r\n', '../../Img/Conquistas/Banners/limbo.png'),
+(16, 'Left 4 Dead', '30.00', '0.00', '../../Img/Jogos/left_4_dead.png\r\n', NULL),
+(17, 'House Flipper', '70.00', '15.00', '../../Img/Jogos/house_flipper.png\r\n', NULL),
+(18, 'Hollow Knigth: Silksong', '45.00', '0.00', '../../Img/Jogos/hollow_knight_silksong.png\r\n', NULL),
+(19, 'GRIS', '40.00', '15.00', '../../Img/Jogos/gris.png\r\n', NULL),
+(20, 'Game Dev Tycoon ', '27.00', '0.00', '../../Img/Jogos/game_dev.png\r\n', NULL),
+(21, 'Fishing Planet ', '0.00', '0.00', '../../Img/Jogos/fishing_planet.png\r\n', NULL),
+(22, 'Euro Truck 2 ', '58.00', '0.00', '../../Img/Jogos/euro_truck.png\r\n', NULL),
+(23, 'Don\'t Starve Together ', '25.00', '0.00', '../../Img/Jogos/dont_starve_together.png\r\n', NULL),
+(24, 'Dead Cells', '45.00', '0.00', '../../Img/Jogos/dead_cells.png\r\n', NULL),
+(25, 'Cooking Simulator', '50.00', '25.00', '../../Img/Jogos/cooking.png\r\n', NULL),
+(26, 'Cities Slylines 2', '150.00', '25.00', '../../Img/Jogos/cities_skyline.png\r\n', NULL),
+(27, 'Celeste ', '50.00', '15.00', '../../Img/Jogos/celeste.png\r\n', NULL),
+(29, 'Bus Simulator 21', '100.00', '15.00', '../../Img/Jogos/bus.png\r\n', NULL),
+(30, 'Buckshot Roulette', '8.00', '0.00', '../../Img/Jogos/buckshot_roulette.png\r\n', NULL),
+(31, 'Banished ', '30.00', '0.00', '../../Img/Jogos/banished.png\r\n', NULL),
+(33, 'Assassin\'s Creed ', '30.00', '0.00', '../../Img/Jogos/AssassinsCreed.jpg', NULL),
+(34, 'Unpacking', '15.00', '0.00', '../../Img/Jogos/unpacking.png', NULL),
+(35, 'Resident Evil 6', '10.00', '0.00', '../../Img/Jogos/resident_evil.png\r\n', NULL),
+(36, 'Need for Speed', '30.00', '0.00', '../../Img/Jogos/need_for_speed.png', NULL),
+(37, 'Moonlighter', '35.00', '0.00', '../../Img/Jogos/moonlighter.png', NULL),
+(39, 'Have a Nice Death', '20.00', '0.00', '../../Img/Jogos/have_a_nice_death.png', NULL),
+(40, 'Goat', '15.00', '0.00', '../../Img/Jogos/goat.png', NULL),
+(41, 'Fortnite', '0.00', '0.00', '../../Img/Jogos/Fortnite.jpg', NULL),
+(42, 'Cult of the Lamb', '30.00', '0.00', '../../Img/Jogos/cult_of_the_lamb.png', NULL),
+(43, 'Bakery Simulator', '45.00', '0.00', '../../Img/Jogos/bakery.png', NULL),
+(44, 'Stardew Valey', '30.00', '0.00', '../../Img/Jogos/stardew_valley.png', NULL),
+(45, 'The Wild at Heart ', '40.00', '0.00', '../../Img/Jogos/the_wild_at_heart.png', NULL),
+(46, 'Skul: The Hero Slayer ', '55.00', '0.00', '../../Img/Jogos/skul.png', NULL),
+(47, 'Omori', '37.00', '10.00', '../../Img/Jogos/omori.png', '../../Img/Conquistas/Banners/omori.png');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `jogo_genero`
+-- Estrutura da tabela `jogo_genero`
 --
 
 CREATE TABLE `jogo_genero` (
   `ID_jogo` int(11) NOT NULL,
   `Id_Gen` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
--- Despejando dados para a tabela `jogo_genero`
+-- Extraindo dados da tabela `jogo_genero`
 --
 
 INSERT INTO `jogo_genero` (`ID_jogo`, `Id_Gen`) VALUES
@@ -481,21 +482,22 @@ INSERT INTO `jogo_genero` (`ID_jogo`, `Id_Gen`) VALUES
 (43, 5),
 (44, 3),
 (45, 1),
-(46, 8);
+(46, 8),
+(47, 25);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `lista_desejo`
+-- Estrutura da tabela `lista_desejo`
 --
 
 CREATE TABLE `lista_desejo` (
   `ID_cliente` int(11) NOT NULL,
   `ID_jogo` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
--- Despejando dados para a tabela `lista_desejo`
+-- Extraindo dados da tabela `lista_desejo`
 --
 
 INSERT INTO `lista_desejo` (`ID_cliente`, `ID_jogo`) VALUES
@@ -514,7 +516,7 @@ INSERT INTO `lista_desejo` (`ID_cliente`, `ID_jogo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `notificacao`
+-- Estrutura da tabela `notificacao`
 --
 
 CREATE TABLE `notificacao` (
@@ -525,12 +527,12 @@ CREATE TABLE `notificacao` (
   `mensagem` text DEFAULT NULL,
   `lido` tinyint(1) DEFAULT 0,
   `data_envio` datetime DEFAULT current_timestamp()
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `pedido_item`
+-- Estrutura da tabela `pedido_item`
 --
 
 CREATE TABLE `pedido_item` (
@@ -538,10 +540,10 @@ CREATE TABLE `pedido_item` (
   `ID_pedido` int(11) NOT NULL,
   `ID_jogo` int(11) NOT NULL,
   `quantidade` int(11) NOT NULL DEFAULT 1
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
--- Despejando dados para a tabela `pedido_item`
+-- Extraindo dados da tabela `pedido_item`
 --
 
 INSERT INTO `pedido_item` (`ID_item`, `ID_pedido`, `ID_jogo`, `quantidade`) VALUES
@@ -554,7 +556,7 @@ INSERT INTO `pedido_item` (`ID_item`, `ID_pedido`, `ID_jogo`, `quantidade`) VALU
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `resumo_pedido`
+-- Estrutura da tabela `resumo_pedido`
 --
 
 CREATE TABLE `resumo_pedido` (
@@ -565,22 +567,22 @@ CREATE TABLE `resumo_pedido` (
   `metodo_pagamento` enum('pix','mastercard','paypal') DEFAULT NULL,
   `total` decimal(10,2) NOT NULL,
   `ID_cupom` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
--- Despejando dados para a tabela `resumo_pedido`
+-- Extraindo dados da tabela `resumo_pedido`
 --
 
 INSERT INTO `resumo_pedido` (`ID_pedido`, `ID_cliente`, `data_pedido`, `status`, `metodo_pagamento`, `total`, `ID_cupom`) VALUES
-(1, 2, '2025-09-28 16:55:06', 'pendente', 'pix', 45.00, NULL),
-(2, 3, '2025-11-01 22:32:47', 'pendente', 'paypal', 70.00, NULL),
-(3, 3, '2025-11-01 22:42:35', 'pendente', 'paypal', 15.00, NULL),
-(4, 1, '2025-11-23 11:53:22', 'pendente', 'pix', 0.00, NULL);
+(1, 2, '2025-09-28 16:55:06', 'pendente', 'pix', '45.00', NULL),
+(2, 3, '2025-11-01 22:32:47', 'pendente', 'paypal', '70.00', NULL),
+(3, 3, '2025-11-01 22:42:35', 'pendente', 'paypal', '15.00', NULL),
+(4, 1, '2025-11-23 11:53:22', 'pendente', 'pix', '0.00', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `suporte`
+-- Estrutura da tabela `suporte`
 --
 
 CREATE TABLE `suporte` (
@@ -588,14 +590,14 @@ CREATE TABLE `suporte` (
   `id_cliente` int(11) NOT NULL,
   `mensagem` text NOT NULL,
   `data_envio` datetime DEFAULT current_timestamp()
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Índices para tabelas despejadas
 --
 
 --
--- Índices de tabela `amizade`
+-- Índices para tabela `amizade`
 --
 ALTER TABLE `amizade`
   ADD PRIMARY KEY (`id_amizade`),
@@ -603,13 +605,13 @@ ALTER TABLE `amizade`
   ADD KEY `id_recebedor` (`id_recebedor`);
 
 --
--- Índices de tabela `avaliacao`
+-- Índices para tabela `avaliacao`
 --
 ALTER TABLE `avaliacao`
   ADD PRIMARY KEY (`ID_avaliacao`);
 
 --
--- Índices de tabela `biblioteca`
+-- Índices para tabela `biblioteca`
 --
 ALTER TABLE `biblioteca`
   ADD PRIMARY KEY (`id_biblioteca`),
@@ -617,14 +619,14 @@ ALTER TABLE `biblioteca`
   ADD KEY `idx_bib_jogo` (`id_jogo`);
 
 --
--- Índices de tabela `carrinho`
+-- Índices para tabela `carrinho`
 --
 ALTER TABLE `carrinho`
   ADD PRIMARY KEY (`ID_carrinho`),
   ADD UNIQUE KEY `cliente_jogo_unico` (`ID_cliente`,`ID_jogo`);
 
 --
--- Índices de tabela `cliente`
+-- Índices para tabela `cliente`
 --
 ALTER TABLE `cliente`
   ADD PRIMARY KEY (`ID_cliente`),
@@ -632,19 +634,19 @@ ALTER TABLE `cliente`
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- Índices de tabela `cliente_conquista`
+-- Índices para tabela `cliente_conquista`
 --
 ALTER TABLE `cliente_conquista`
   ADD PRIMARY KEY (`ID_cliente`,`ID_conq`);
 
 --
--- Índices de tabela `cliente_item`
+-- Índices para tabela `cliente_item`
 --
 ALTER TABLE `cliente_item`
   ADD PRIMARY KEY (`ID_cliente`,`ID_item`);
 
 --
--- Índices de tabela `cliente_jogo`
+-- Índices para tabela `cliente_jogo`
 --
 ALTER TABLE `cliente_jogo`
   ADD PRIMARY KEY (`id_cliente_jogo`),
@@ -652,56 +654,56 @@ ALTER TABLE `cliente_jogo`
   ADD KEY `idx_jogo` (`id_jogo`);
 
 --
--- Índices de tabela `conquista`
+-- Índices para tabela `conquista`
 --
 ALTER TABLE `conquista`
   ADD PRIMARY KEY (`ID_conq`);
 
 --
--- Índices de tabela `cupom`
+-- Índices para tabela `cupom`
 --
 ALTER TABLE `cupom`
   ADD PRIMARY KEY (`ID_cupom`);
 
 --
--- Índices de tabela `desenvolvedor`
+-- Índices para tabela `desenvolvedor`
 --
 ALTER TABLE `desenvolvedor`
   ADD PRIMARY KEY (`ID_desenvolvedor`);
 
 --
--- Índices de tabela `genero`
+-- Índices para tabela `genero`
 --
 ALTER TABLE `genero`
   ADD PRIMARY KEY (`Id_Gen`);
 
 --
--- Índices de tabela `inventario_pontos`
+-- Índices para tabela `inventario_pontos`
 --
 ALTER TABLE `inventario_pontos`
   ADD PRIMARY KEY (`id_inventario`),
   ADD UNIQUE KEY `unique_cliente_item` (`id_cliente`,`id_item`);
 
 --
--- Índices de tabela `item_pontos`
+-- Índices para tabela `item_pontos`
 --
 ALTER TABLE `item_pontos`
   ADD PRIMARY KEY (`ID_item`);
 
 --
--- Índices de tabela `jogo`
+-- Índices para tabela `jogo`
 --
 ALTER TABLE `jogo`
   ADD PRIMARY KEY (`ID_jogo`);
 
 --
--- Índices de tabela `lista_desejo`
+-- Índices para tabela `lista_desejo`
 --
 ALTER TABLE `lista_desejo`
   ADD PRIMARY KEY (`ID_cliente`,`ID_jogo`);
 
 --
--- Índices de tabela `notificacao`
+-- Índices para tabela `notificacao`
 --
 ALTER TABLE `notificacao`
   ADD PRIMARY KEY (`id_notificacao`),
@@ -709,25 +711,25 @@ ALTER TABLE `notificacao`
   ADD KEY `idx_remetente` (`id_remetente`);
 
 --
--- Índices de tabela `pedido_item`
+-- Índices para tabela `pedido_item`
 --
 ALTER TABLE `pedido_item`
   ADD PRIMARY KEY (`ID_item`);
 
 --
--- Índices de tabela `resumo_pedido`
+-- Índices para tabela `resumo_pedido`
 --
 ALTER TABLE `resumo_pedido`
   ADD PRIMARY KEY (`ID_pedido`);
 
 --
--- Índices de tabela `suporte`
+-- Índices para tabela `suporte`
 --
 ALTER TABLE `suporte`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT para tabelas despejadas
+-- AUTO_INCREMENT de tabelas despejadas
 --
 
 --
@@ -806,7 +808,7 @@ ALTER TABLE `item_pontos`
 -- AUTO_INCREMENT de tabela `jogo`
 --
 ALTER TABLE `jogo`
-  MODIFY `ID_jogo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `ID_jogo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT de tabela `notificacao`
@@ -833,11 +835,11 @@ ALTER TABLE `suporte`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- Restrições para tabelas despejadas
+-- Restrições para despejos de tabelas
 --
 
 --
--- Restrições para tabelas `amizade`
+-- Limitadores para a tabela `amizade`
 --
 ALTER TABLE `amizade`
   ADD CONSTRAINT `amizade_ibfk_1` FOREIGN KEY (`id_solicitante`) REFERENCES `cliente` (`ID_cliente`) ON DELETE CASCADE,
