@@ -112,4 +112,14 @@ $perfil = Perfil::buscarPorId($_SESSION['usuario_id']);
 
      </div>
 </body>
+
+<footer>
+  <div class="social-icons">
+    <a href="https://www.instagram.com/skulljabb/" target="_blank"><i class="mdi mdi2 mdi-instagram icone"></i></a>
+    <a href="#"><i class="mdi mdi2 mdi-whatsapp icone"></i></a>
+    <a href="mailto:SkullJabb@gmail.com" target="_blank"><i class="mdi mdi2 mdi-email-outline"></i></a>
+  </div>
+  <p>© 2024 Skull Jabb - Todos os direitos reservados.</p>
+</footer>
+
 </html>
