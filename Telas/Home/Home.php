@@ -83,28 +83,26 @@ $perfil = Perfil::buscarPorId($_SESSION['usuario_id']);
       </div>
 
       <div class="destaque">
-        <a href="#"><img src="../../Img/Jogos/cult_of_the_lamb.png" alt="Cult of the Lamb" /></a>
+        <a href="../Tela de Jogos/teladejogos.php?id=42"><img src="../../Img/Jogos/cult_of_the_lamb.png" alt="Cult of the Lamb" /></a>
       </div>
     </div>
   </section>
 
-  <!-- CARDS -->
   <div class="cards">
     <div class="card">
       <span class="tag">Conteúdo Extra</span>
-      <a href="#"><img src="../../Img/Jogos/cuphead_extra.png" alt="Cuphead" /></a>
+      <a href="../Tela de Jogos/teladejogos.php?id=1"><img src="../../Img/Jogos/cuphead_extra.png" alt="Cuphead" /></a>
     </div>
     <div class="card">
       <span class="tag">Conteúdo Extra</span>
-      <a href="#"><img src="../../Img/Jogos/dont_staver_together_extra.png" alt="Don't Starve Together" /></a>
+      <a href="../Tela de Jogos/teladejogos.php?id=23"><img src="../../Img/Jogos/dont_staver_together_extra.png" alt="Don't Starve Together" /></a>
     </div>
     <div class="card">
       <span class="tag">Descobrir</span>
-      <a href="#"><img src="../../Img/Jogos/omori_extra.png" alt="Omori" /></a>
+      <a href="../Tela de Jogos/teladejogos.php?id=47"><img src="../../Img/Jogos/omori_extra.png" alt="Omori" /></a>
     </div>
   </div>
 
-  <!-- FOOTER -->
   <footer>
     <div class="social-icons">
       <a href="https://www.instagram.com/skulljabb/" target="_blank"><i class="mdi mdi2 mdi-instagram icone"></i></a>

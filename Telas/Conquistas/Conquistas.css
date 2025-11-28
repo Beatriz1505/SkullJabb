@@ -202,20 +202,94 @@ body {
   gap: 10px;
 }
 
-.ordenar {
-  background: #2B2B3A;
-  color: white;
-  font-size: 20px;
-  padding: 6px 12px;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-  margin-left: auto;
+/* Estilos para o filtro */
+.filtro-container {
+  position: relative;
+  display: inline-block;
 }
 
-.ordenar option {
+.botao-filtro {
   background: #2B2B3A;
   color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.botao-filtro:hover {
+  background: #3b7ef5;
+}
+
+.menu-filtro {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #2B2B3A;
+  padding: 10px;
+  border-radius: 8px;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 1000;
+  min-width: 160px;
+  margin-top: 5px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.menu-filtro.mostrar {
+  display: flex;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.menu-filtro a {
+  text-decoration: none;
+}
+
+.menu-filtro button {
+  background: #3A415A;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: left;
+  font-size: 16px;
+  width: 100%;
+  transition: background 0.2s;
+  font-family: 'Poppins', sans-serif;
+}
+
+.menu-filtro button:hover {
+  background: #3b7ef5;
+  color: white;
+}
+
+/* Indicador de ordenação atual */
+.ordem-atual {
+  color: #3b7ef5;
+  font-weight: 600;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Para evitar que o menu feche quando clicar nos botões */
+.menu-filtro button:focus {
+  outline: none;
 }
 
 .cards {

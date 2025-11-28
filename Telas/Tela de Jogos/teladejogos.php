@@ -248,19 +248,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
 
 
-<!-- Conquistas puxadas do BD -->
+<!-- Conquistas puxadas do BD (máx. 3 + link para a tela completa) -->
 <div class="achievements-box">
     <h3>Conquistas</h3>
-    <ul>
+    <ul class="conq-list">
         <?php
-        $sqlConq = "SELECT nome, descricao 
+        $sqlConq = "SELECT ID_conq, nome, descricao 
                     FROM conquista 
-                    WHERE ID_jogo = $id";
+                    WHERE ID_jogo = $id
+                    LIMIT 3";
         $resConq = $conn->query($sqlConq);
 
         if ($resConq->num_rows > 0) {
             while ($conq = $resConq->fetch_assoc()) {
-                echo "<li><strong>" . htmlspecialchars($conq['nome']) . ":</strong> " . htmlspecialchars($conq['descricao']) . "</li>";
+
+                $nome = htmlspecialchars($conq['nome']);
+                $desc = htmlspecialchars($conq['descricao']);
+
+                echo "
+                <li class='conq-item'>
+                    <a href=\"../Conquistas/conquistas.php?id=$id\" class='conq-link'>
+                        <strong>$nome</strong><br>
+                        <span>$desc</span>
+                    </a>
+                </li>";
             }
         } else {
             echo "<li>Este jogo ainda não possui conquistas cadastradas.</li>";
@@ -268,6 +279,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ?>
     </ul>
 </div>
+
 
 </main>
 

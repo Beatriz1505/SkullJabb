@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once "../Loja de pontos/ClasseModelagemLojaPontos.php";
 require_once "ClasseModelagemPerfil.php";
 require_once "../Conexao/Conexao.php";
 require_once "../Perfil - User/ClasseModelagemPerfilUser.php";
@@ -22,6 +23,8 @@ if (!$perfil) {
 $amigos = [];
 $jogosRecentes = [];
 $pendentes = [];
+
+$itensComprados = LojaPontos::listarItensComprados($meuId) ?? [];
 
 if (class_exists('PerfilUser')) {
     $amigos = PerfilUser::buscarAmigos($idPerfil);
@@ -187,13 +190,47 @@ $displayUsuario = htmlspecialchars($perfil->usuario ?? strtolower(str_replace(" 
         <input type="text" name="nome" value="<?= htmlspecialchars($perfil->nome) ?>" placeholder="Nome" class="input-field">
         <input type="text" name="usuario" value="<?= htmlspecialchars($perfil->usuario ?? '') ?>" placeholder="Usuário" class="input-field">
 
-        <div class="molduras">
-          <label><input type="radio" name="moldura" value="" <?= empty($perfil->moldura) ? "checked" : "" ?>><span style="color:#fff">Nenhuma</span></label>
-          <label><input type="radio" name="moldura" value="../../Img/Loja de Pontos/moldura_caveira.png" <?= ($perfil->moldura ?? '') === "../../Img/Loja de Pontos/moldura_caveira.png" ? "checked" : "" ?>><img src="../../Img/Loja de Pontos/moldura_caveira.png"></label>
-          <label><input type="radio" name="moldura" value="../../Img/Loja de Pontos/moldura_coracao.png" <?= ($perfil->moldura ?? '') === "../../Img/Loja de Pontos/moldura_coracao.png" ? "checked" : "" ?>><img src="../../Img/Loja de Pontos/moldura_coracao.png"></label>
-          <label><input type="radio" name="moldura" value="../../Img/Loja de Pontos/moldura_cogumelo.png" <?= ($perfil->moldura ?? '') === "../../Img/Loja de Pontos/moldura_cogumelo.png" ? "checked" : "" ?>><img src="../../Img/Loja de Pontos/moldura_cogumelo.png"></label>
-          <label><input type="radio" name="moldura" value="../../Img/Loja de Pontos/moldura_gatos_azuis.png" <?= ($perfil->moldura ?? '') === "../../Img/Loja de Pontos/moldura_gatos_azuis.png" ? "checked" : "" ?>><img src="../../Img/Loja de Pontos/moldura_gatos_azuis.png"></label>
-        </div>
+<div class="molduras">
+
+  <!-- Moldura: Nenhuma -->
+  <label>
+    <input type="radio" name="moldura" value=""
+      <?= empty($perfil->moldura) ? "checked" : "" ?>>
+    <span style="color:#fff">Nenhuma</span>
+  </label>
+
+  <!-- Molduras fixas -->
+  <?php  
+  $moldurasFixas = [
+      "../../Img/Loja de Pontos/moldura_caveira.png",
+      "../../Img/Loja de Pontos/moldura_coracao.png",
+      "../../Img/Loja de Pontos/moldura_cogumelo.png",
+      "../../Img/Loja de Pontos/moldura_gatos_azuis.png"
+  ];
+
+  foreach ($moldurasFixas as $m):
+  ?>
+      <label>
+        <input type="radio" name="moldura" value="<?= $m ?>"
+          <?= ($perfil->moldura ?? '') === $m ? "checked" : "" ?>>
+        <img src="<?= $m ?>">
+      </label>
+  <?php endforeach; ?>
+
+
+  <!-- Molduras compradas na loja -->
+  <?php foreach ($itensComprados as $item):
+      if (strtolower($item['tipo']) !== 'moldura') continue;
+      $img = htmlspecialchars($item['Img']);
+  ?>
+      <label>
+        <input type="radio" name="moldura" value="<?= $img ?>"
+          <?= ($perfil->moldura ?? '') === $img ? "checked" : "" ?>>
+        <img src="<?= $img ?>">
+      </label>
+  <?php endforeach; ?>
+
+</div>
 
         <div class="editar-botoes">
           <button type="submit" class="salvar">Salvar</button>

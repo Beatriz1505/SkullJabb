@@ -243,6 +243,7 @@ transition: 0.3s;
   grid-template-columns: 1fr 1fr; /* Avaliações e Conquistas lado a lado */
   gap: 30px;
   margin-top: 30px;
+  text-decoration: none;
 }
 
 /* ===== Avaliações ===== */
@@ -337,6 +338,7 @@ transition: 0.3s;
   font-size: 22px;
   border-bottom: 2px solid #3b7ef5;
   padding-bottom: 5px;
+  text-decoration: none;
 }
 
 .achievements-box ul {
@@ -455,4 +457,5 @@ footer .social-icons a:hover {
 
 a {
     color: white;
+    text-decoration: none;
 }
